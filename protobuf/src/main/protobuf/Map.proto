@@ -3,7 +3,7 @@ option java_outer_classname = "MapCollection";
 option optimize_for = SPEED;
 //option optimize_for = LITE_RUNTIME;
 //option optimize_for = CODE_SIZE;
-
+//
 
 message StringMsg {
     required string value = 1;

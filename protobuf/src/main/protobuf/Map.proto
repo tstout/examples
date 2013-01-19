@@ -1,0 +1,34 @@
+option java_package = "protobuf.example";
+option java_outer_classname = "MapCollection";
+option optimize_for = SPEED;
+//option optimize_for = LITE_RUNTIME;
+//option optimize_for = CODE_SIZE;
+
+
+message StringMsg {
+    required string value = 1;
+}
+
+message BinaryMsg {
+    required bytes value = 1;
+}
+
+message KeyValue {
+
+    enum Type {
+        String = 1;
+        Int32 = 2;
+        Boolean = 3;
+    }
+
+    required Type type = 1;
+    required string key = 2;
+    optional string stringValue = 3;
+    optional int32 int32Value = 4;
+    optional bool boolValue = 5;
+}
+
+message MapMsg {
+    repeated KeyValue items = 1;
+}
+

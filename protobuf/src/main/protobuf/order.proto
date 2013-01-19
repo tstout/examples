@@ -1,0 +1,37 @@
+option java_package = "protobuf.example";
+option java_outer_classname = "Order";
+option optimize_for = SPEED;
+//option optimize_for = LITE_RUNTIME;
+//option optimize_for = CODE_SIZE;
+
+//
+// BDecimal is used to represent java's BigDecimal
+//
+message BDecimal {
+    required int32 scale = 1;
+    required BInteger intVal = 2;
+}
+
+message BInteger {
+    required bytes value = 1;
+}
+
+message OrderItem {
+    required int64 skuNumber = 1;
+    required int32 quantity = 2;
+    required BDecimal price = 3;
+
+    optional string upc = 4;
+    optional string offerCode = 5;
+
+    repeated OrderItemFee itemFees = 6;
+}
+
+message OrderItemFee {
+    required int32 quantity = 1;
+    required BDecimal amount = 2;
+
+    optional bool taxable = 3 [default = true];
+}
+
+

@@ -1,5 +1,6 @@
 package protobuf.example;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -22,6 +23,7 @@ public class ToStringTest {
                         .build())
                 .build();
 
-        System.out.print(orderItem.toString());
+        Logger.getLogger(getClass())
+            .info(orderItem.toString());
     }
 }

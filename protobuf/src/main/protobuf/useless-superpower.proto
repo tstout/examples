@@ -1,0 +1,20 @@
+package protobuf.example;
+
+option java_outer_classname = "SuperHero";
+
+enum FutileSuperpowerType {
+    ONE_SECOND_SUPER_STRENGTH   = 1;
+    READ_YOUR_OWN_MIND          = 2;
+    BULLET_ATTRACTION           = 3;
+    ABNORMAL_ARMHAIR_GROWTH     = 4;
+    SUMMON_A_LAMP_ONCE          = 5;
+    COMMUNICATE_WITH_FRUIT      = 6;
+}
+
+message UselessSuperHeroSighting {
+ required string name = 1;
+ required double longitude = 2;
+ required double latitude = 3;
+ optional string description = 4;
+ required FutileSuperpowerType powerType = 5 [default = BULLET_ATTRACTION];
+}

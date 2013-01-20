@@ -1,9 +1,23 @@
 option java_package = "protobuf.example";
-option java_outer_classname = "MapCollection";
+option java_outer_classname = "Collection";
 option optimize_for = SPEED;
 //option optimize_for = LITE_RUNTIME;
 //option optimize_for = CODE_SIZE;
-//
+
+message Msg {
+
+    enum Type {
+        Map = 1;
+        String = 2;
+        Binary = 3;
+    }
+
+    required Type type = 1;
+    required string destination = 2;
+    optional StringMsg stringMsg = 3;
+    optional BinaryMsg binaryMsg = 4;
+    optional MapMsg mapMsg = 5;
+}
 
 message StringMsg {
     required string value = 1;
@@ -31,4 +45,3 @@ message KeyValue {
 message MapMsg {
     repeated KeyValue items = 1;
 }
-

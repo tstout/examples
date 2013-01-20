@@ -7,6 +7,7 @@ import java.math.BigInteger;
 
 import static protobuf.example.Order.*;
 
+
 public class Money {
 
     private final BigDecimal bdVal;

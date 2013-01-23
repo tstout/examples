@@ -51,6 +51,9 @@ public class ReflectionTest {
 
     Message modifyMessage(Message message) {
 
+        //
+        // For any field type present in the map, set its value...
+        //
         ImmutableMap<Descriptors.FieldDescriptor.Type, ?> valuesForType =
                 of(Descriptors.FieldDescriptor.Type.DOUBLE, NEW_DOUBLE_VALUE,
                         Descriptors.FieldDescriptor.Type.STRING, NEW_STRING_VALUE);

@@ -16,8 +16,7 @@ public class SuperHeroTest {
     static final double LAT = 55.949354;
     static final double LONG = -3.147583;
 
-    File dataFile = new File(System.getProperty("user.home"), "sighting.dat");
-
+    File dataFile = new File(System.getProperty("user.home"), "sighting.data");
 
     @Test
     public void serializeSuperHeroSighting() throws IOException {
@@ -29,21 +28,20 @@ public class SuperHeroTest {
                 .setPowerType(COMMUNICATE_WITH_FRUIT)
                 .build();
 
-        serializeToFile(sighting);
+        writeMsgToFile(sighting);
 
-        UselessSuperHeroSighting hydratedSighting = deserialzeFromFile();
+        UselessSuperHeroSighting hydratedSighting = readMsgFromFile();
 
         assertEquals(hydratedSighting.getLatitude(), LAT);
         assertEquals(hydratedSighting.getLongitude(), LONG);
         assertEquals(hydratedSighting.getPowerType(), COMMUNICATE_WITH_FRUIT);
     }
 
-    void serializeToFile(Message message) throws IOException {
+    void writeMsgToFile(Message message) throws IOException {
         Files.write(message.toByteArray(), dataFile);
     }
 
-    UselessSuperHeroSighting deserialzeFromFile() throws IOException {
+    UselessSuperHeroSighting readMsgFromFile() throws IOException {
         return UselessSuperHeroSighting.parseFrom(Files.toByteArray(dataFile));
     }
-
 }

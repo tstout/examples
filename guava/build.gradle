@@ -1,0 +1,30 @@
+apply plugin: 'java'
+
+
+repositories {
+    mavenCentral()
+}
+
+
+version = '1.0'
+
+dependencies {
+    compile(
+            'com.google.guava:guava:12.0'
+    )
+    testCompile(
+            'junit:junit:4.10',
+            'org.mockito:mockito-core:1.9.0'
+    )
+}
+
+jar {
+    manifest.attributes provider: 'gradle'
+}
+
+
+task "create-dirs" << {
+    sourceSets*.java.srcDirs*.each { it.mkdirs() }
+    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}
+

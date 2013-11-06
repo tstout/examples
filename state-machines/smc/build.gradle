@@ -26,7 +26,7 @@ dependencies {
 }
 
 task gensrcDirs {
-    genSrcDir = new File("${project.buildDir}/generated-src/smc/main/java/example/smc")
+    ext.genSrcDir = new File("${project.buildDir}/generated-src/smc/main/java/example/smc")
     genSrcDir.mkdirs()
 }
 

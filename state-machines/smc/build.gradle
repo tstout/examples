@@ -26,20 +26,20 @@ dependencies {
 }
 
 task gensrcDirs {
-    ext.genSrcDir = new File("${project.buildDir}/generated-src/smc/main/java/example/smc")
+    ext.genSrcDir = new File("${project.buildDir}/generated-src/example/smc")
     genSrcDir.mkdirs()
 }
 
 task generateSmcSources(type: JavaExec, dependsOn: 'gensrcDirs') {
     def smcFiles = fileTree('src/main/smc').include('**/*.sm')
-    ext.outputPath = "${project.buildDir}/generated-src/smc/main/java/example/smc"
+    ext.outputPath = "${project.buildDir}/generated-src/example/smc"
     inputs.files smcFiles
     outputs.dir outputPath
     classpath configurations.smc
     main = 'net.sf.smc.Smc'
     args('-java')
     args('-d')
-    args("${project.buildDir}/generated-src/smc/main/java/example/smc")
+    args("${project.buildDir}/generated-src/example/smc")
     args(smcFiles.files)
 }
 

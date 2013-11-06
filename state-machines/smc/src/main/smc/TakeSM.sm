@@ -1,0 +1,44 @@
+%class		TakeSM
+%package	example.smc
+//%import	 	System.Net.Sockets
+//%import		System.Net
+%start	 	Order::Active
+%map	 	Order
+%%
+
+Active {
+//
+//	Event									Next State	 			Actions
+//
+	addItem(item: LineItem)                 nil		                { }
+	finish		                            Finished				{ }
+	suspend                                 Suspended               { }
+}
+
+Finished {
+//
+//  Event                                   Next State              Actions
+//
+
+}
+
+Suspended {
+//
+//  Event   Next State  Actions
+//
+    resume  Active      {}
+}
+
+//
+// How about defining specific error events in the
+// SM instead of a blanket Error event?
+//
+//Default
+//{
+//
+// Transition	Next State	Actions
+//
+//Error			nil			{}
+//WriteReady    nil			{}
+//}
+%%

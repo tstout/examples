@@ -1,0 +1,50 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+configurations {
+    smc
+}
+
+ext.libraries = [
+        runtime_core: [
+                'com.google.guava:guava:14.0.1'
+        ],
+        test_core: [
+                'org.mockito:mockito-core:1.9.0',
+                'junit:junit:4.10'
+        ]
+]
+
+dependencies {
+    smc 'net.sf.smc:smc:4.3'
+    compile ('net.sf.smc:smc:4.3',
+            libraries.runtime_core)
+    testCompile (libraries.test_core)
+}
+
+task gensrcDirs {
+    genSrcDir = new File("${project.buildDir}/generated-src/smc/main/java/example/smc")
+    genSrcDir.mkdirs()
+}
+
+task generateSmcSources(type: JavaExec, dependsOn: 'gensrcDirs') {
+    def smcFiles = fileTree('src/main/smc').include('**/*.sm')
+    ext.outputPath = "${project.buildDir}/generated-src/smc/main/java/example/smc"
+    inputs.files smcFiles
+    outputs.dir outputPath
+    classpath configurations.smc
+    main = 'net.sf.smc.Smc'
+    args('-java')
+    args('-d')
+    args("${project.buildDir}/generated-src/smc/main/java/example/smc")
+    args(smcFiles.files)
+}
+
+sourceSets.main.java.srcDir generateSmcSources.outputPath
+compileJava.dependsOn generateSmcSources
+
+
+

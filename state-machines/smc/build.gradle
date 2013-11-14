@@ -18,9 +18,14 @@ ext.libraries = [
         ]
 ]
 
+//
+// Use local lib dependency since current SMC not available in maven central (Boo!)
+//
 dependencies {
-    smc 'net.sf.smc:smc:4.3'
-    compile ('net.sf.smc:smc:4.3',
+    smc fileTree(dir: 'lib', includes: ['*.jar'])
+    //smc 'net.sf.smc:smc:4.3'
+    compile (
+            fileTree(dir: 'lib', includes: ['*.jar']),
             libraries.runtime_core)
     testCompile (libraries.test_core)
 }

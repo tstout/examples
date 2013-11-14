@@ -10,7 +10,7 @@ Active {
 //
 //	Event									Next State	 			Actions
 //
-	addItem(item: LineItem)                 nil		                { }
+	addItem(item: LineItem)                 nil		                { appendOrderItem(); }
 	finish		                            Finished				{ }
 	suspend                                 Suspended               { }
 }

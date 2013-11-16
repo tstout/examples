@@ -7,7 +7,8 @@
 \usepackage{tikz}                                         % SM Diagramming stuff
 \usepackage{listings}                                   % Source code formatting
 \usepackage{hyperref}
-\usepackage{graphicx}
+\usepackage{graphicx}                                 % Table resizing
+\usepackage{tabularx}
 \usetikzlibrary{automata,positioning}
 \hypersetup{colorlinks=true,linkcolor=red}
 
@@ -89,20 +90,42 @@ for (int i = 0; i < 20; i++) {
 % http://www.w3.org/TR/scxml/
 % Wow, simply wow. 
 %
-\begin{frame}
-  \frametitle{Frameworks/Libraries (small sampling)}
-\begin{table}
-\resizebox{\textwidth}{!}{%
-    \begin{tabular}{|l|l|l|l|l|} \hline
-     & Language Support & External DSL & Internal DSL & Open Source\\ \hline
-    \href{https://code.google.com/p/stateless4j/}{stateless4j} & Java & & X & \\ \hline
-    \href{http://smc.sourceforge.net/}{SMC} &Numerous & X & & \\ \hline
-    \href{http://www.complang.org/ragel/}{Ragel} & Several & X & & \\ \hline
-    \href{https://github.com/Beh01der/EasyFlow/}{EasyFlow} & Several & X & & \\ \hline
-    \href{https://github.com/hekailiang/squirrel}{Squirrel} & Several & X & & \\ \hline
-    \end{tabular}}
-\end{table}
+% \begin{frame}
+%   \frametitle{Frameworks/Libraries (small sampling)}
+% \begin{table}
+% \resizebox{\textwidth}{!}{
+%     \begin{tabular}{|l|l|l|l|l|} \hline
+%      & Language Support & External DSL & Internal DSL & Open Source\\ \hline
+%     \href{https://code.google.com/p/stateless4j/}{stateless4j} & Java & & X & \\ \hline
+%     \href{http://smc.sourceforge.net/}{SMC} &Numerous & X & & \\ \hline
+%     \href{http://www.complang.org/ragel/}{Ragel} & Several & X & & \\ \hline
+%     \href{https://github.com/Beh01der/EasyFlow/}{EasyFlow} & Several & X & & \\ \hline
+%     \href{https://github.com/hekailiang/squirrel}{Squirrel} & Several & X & & \\ \hline
+%     \end{tabular}
+% }
+% \end{table}
 
+% \end{frame}
+
+\begin{frame}
+  \frametitle{Frameworks/Libraries }
+  \begin{tabularx}{\textwidth}{ |X|X|X|X|X| }
+    \hline
+    & Language Support & External DSL & Internal DSL & Open Source \\
+    \hline
+    \href{https://code.google.com/p/stateless4j/}{stateless4j} & Java & & X & \\ 
+    \hline
+     \href{http://smc.sourceforge.net/}{SMC} &Numerous & X & & \\ 
+    \hline
+     \href{http://www.complang.org/ragel/}{Ragel} & Several & X & & \\ 
+    \hline
+     \href{https://github.com/Beh01der/EasyFlow/}{EasyFlow} & Several &
+    X & & \\ 
+    \hline
+     \href{https://github.com/hekailiang/squirrel}{Squirrel} & Several & X & & \\ 
+    \hline
+    \end{tabularx}
 \end{frame}
+
 
 \end{document}

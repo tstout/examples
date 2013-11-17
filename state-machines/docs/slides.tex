@@ -13,6 +13,7 @@
 \hypersetup{colorlinks=true,linkcolor=red}
 
 \begin{document}
+\include{variables}
 %
 % Title Page
 %
@@ -107,30 +108,25 @@ for (int i = 0; i < 20; i++) {
 
 % \end{frame}
 
-% - TODO: see about putting these hrefs into variables (savebox, etc)
-
 \begin{frame}
   \frametitle{State Machine Frameworks}
   \begin{tabularx}{\textwidth}{ |X|X|X|X|X| }
     \hline
     & Language Support & External DSL & Internal DSL & Open Source \\
     \hline
-    \href{https://code.google.com/p/stateless4j/}{stateless4j} & Java & & X & \\ 
+    \statelessUrl & Java & & X & \\ 
     \hline
-     \href{http://smc.sourceforge.net/}{smc} &Numerous & X & & \\ 
+    \smcUrl  & Numerous & X & & \\ 
     \hline
-     \href{http://www.complang.org/ragel/}{ragel} & Several & X & & \\ 
+     \ragelUrl & Several & X & & \\ 
     \hline
-     \href{https://github.com/Beh01der/EasyFlow/}{easyflow} & Several &
-    X & & \\ 
+     \easyFlowUrl & Several & X & & \\ 
     \hline
-     \href{https://github.com/hekailiang/squirrel}{squirrel} & Several & X & & \\ 
+   \squirrelUrl & Several & X & & \\ 
     \hline
-    \href{https://github.com/ifandelse/machina.js}{machina} &
-    javascript & & X & \\
+    \machinaUrl &  javascript & & X & \\
     \hline
-    \href{https://github.com/jakesgordon/javascript-state-machine}{js-sm} &
-    javascript & & X & \\
+    \jssmUrl & javascript & & X & \\
     \hline
     \end{tabularx}
 \end{frame}

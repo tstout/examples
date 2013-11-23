@@ -1,16 +1,35 @@
 \documentclass{beamer}
-%
-% Warsaw is a canned beamer theme, for others see  
-%  http://en.wikibooks.org/wiki/LaTeX/Presentations#Themes
-%
-\usetheme{Warsaw}                                      
+
+\usetheme{Warsaw}    
+%\usetheme{Dresden}                  % looks pretty good
+%\usetheme{Frankfurt}                % +1
+%\usetheme{Goettingen}             % +1 simple and clean
+%\usetheme{Ilmenau}                    % +1 bright
+%\usetheme{Luebeck}                 % +1 can't tell much diff from warsaw
+%\usetheme{Madrid}                   % +1 like warsaw, but date footer
+%\usetheme{Malmoe}                  % Like warsaw, but not header colors
+%\usetheme{Singapore}               % +1 minimal and clean
+                        
 \usepackage{tikz}                                         % SM Diagramming stuff
 \usepackage{listings}                                   % Source code formatting
 \usepackage{hyperref}
 \usepackage{graphicx}                                 % Table resizing
 \usepackage{tabularx}
 \usetikzlibrary{automata,positioning}
-\hypersetup{colorlinks=true,linkcolor=red}
+\hypersetup{colorlinks=true,linkcolor=blue}
+
+%
+% Research Notes:
+%
+% Here's some intro to SM from stateworks
+% http://www.stateworks.com/active/download/wagf04-2-state-machine-misunderstandings.pdf
+%
+% Here's the book from stateworks:
+% http://is.ifmo.ru/download/modelingsoftwarewithfinitestatemachinesapracticalapproach.pdf
+
+% Here's an example of using metapost uml:
+% http://rxwen.blogspot.com/2010/11/draw-uml-with-latex.html
+%
 
 \begin{document}
 \include{variables}
@@ -44,20 +63,16 @@ November 2013
 % Introduction
 %
 \frame{
-  \frametitle{Background}
-  Lage body of academic literature surrounding state machines...bah,
-  Let's move on.
-}
-
-\frame{
   \frametitle{Applications}
   \itemize{
-    \pause
-  \item Async Event Driven Systems \pause
+%
+% TODO - need more detailed examples...
+%
+  \item Parsers and Lexers\pause
   \item Communication Protocols \pause
   \item Complex User Inerfaces \pause
-  \item  
-   \item Move logic into data
+  \item Validating User Input \pause
+  \item Digital Circuits
    }
 }
   
@@ -66,15 +81,25 @@ November 2013
 %
 \frame{
     \frametitle{Why?}
-    \framesubtitle{Isn't this academic blather?}
-    \itemize{
-      \item 
-    }
+\begin{itemize}
+  \item Manage and simplify complexity
+    \pause
+   \item  Specify intent and implementation separately
+\end{itemize}
 }
 
 \begin{frame}
-  \frametitle{When?}  
+  \frametitle{When?}
+  A state machine might be appropriate if
+  \begin{itemize}
+    \pause
+    \item many flag variables
+     \pause
+    \item deeply nested if statements
+  \end{itemize} 
 \end{frame}
+
+%http://media.pragprog.com/articles/nov_02_state.pdf
 
 \begin{frame}[fragile]
   \frametitle{How?}
@@ -91,25 +116,9 @@ for (int i = 0; i < 20; i++) {
 % http://www.w3.org/TR/scxml/
 % Wow, simply wow. 
 %
-% \begin{frame}
-%   \frametitle{Frameworks/Libraries (small sampling)}
-% \begin{table}
-% \resizebox{\textwidth}{!}{
-%     \begin{tabular}{|l|l|l|l|l|} \hline
-%      & Language Support & External DSL & Internal DSL & Open Source\\ \hline
-%     \href{https://code.google.com/p/stateless4j/}{stateless4j} & Java & & X & \\ \hline
-%     \href{http://smc.sourceforge.net/}{SMC} &Numerous & X & & \\ \hline
-%     \href{http://www.complang.org/ragel/}{Ragel} & Several & X & & \\ \hline
-%     \href{https://github.com/Beh01der/EasyFlow/}{EasyFlow} & Several & X & & \\ \hline
-%     \href{https://github.com/hekailiang/squirrel}{Squirrel} & Several & X & & \\ \hline
-%     \end{tabular}
-% }
-% \end{table}
-
-% \end{frame}
 
 \begin{frame}
-  \frametitle{State Machine Frameworks}
+  \frametitle{State Machine Frameworks (small sampling)}
   \begin{tabularx}{\textwidth}{ |X|X|X|X|X| }
     \hline
     & Language Support & External DSL & Internal DSL & Open Source \\

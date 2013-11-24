@@ -1,7 +1,10 @@
 %class		TakeSM
 %package	example.smc
-//%import	 	System.Net.Sockets
-//%import		System.Net
+//
+// Add any imports here...
+//
+//%import	your.package.name
+//
 %start	 	Order::Active
 %map	 	Order
 %%
@@ -10,9 +13,28 @@ Active {
 //
 //	Event									Next State	 			Actions
 //
-	addItem(item: LineItem)                 nil		                { appendOrderItem(); }
+	addItem(item: LineItem)                 nil		                { appendOrderItem(item); }
 	finish		                            Finished				{ }
 	suspend                                 Suspended               { }
+}
+
+Finishing
+    Entry {
+        startTimer(5000);
+        finishOrder();
+    }
+    Exit {
+        stopTimer();
+    }
+{
+
+//
+//	Event									Next State	 			Actions
+//
+    timeout                                 [ctxt.retryCount() > 3]
+                                            Finishing               { ctxt.incRetryCount(); }
+
+    timeout                                 Failed                  { }
 }
 
 Finished {
@@ -22,11 +44,23 @@ Finished {
 
 }
 
-Suspended {
-//
-//  Event   Next State  Actions
-//
-    resume  Active      {}
+Failed {
+
+}
+
+
+Suspended
+    Entry {
+        persistOrder();
+    }
+{
+
+    //
+
+    //
+    //  Event   Next State  Actions
+    //
+    resume      Active      {}
 }
 
 //

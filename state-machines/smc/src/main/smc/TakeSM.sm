@@ -13,9 +13,9 @@ Active {
 //
 //	Event									Next State	 			Actions
 //
-	addItem(item: LineItem)                 nil		                { appendOrderItem(item); }
-	finish		                            Finished				{ }
-	suspend                                 Suspended               { }
+    addItem(item: LineItem)                 nil		                { appendOrderItem(item); }
+    finish		                            Finished				{ }
+    suspend                                 Suspended               { }
 }
 
 Finishing

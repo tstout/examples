@@ -1,21 +1,21 @@
-%class		TakeSM
-%package	example.smc
+%class          TakeSM
+%package        example.smc
 //
 // Add any imports here...
 //
-//%import	your.package.name
+//%import       your.package.name
 //
-%start	 	Order::Active
-%map	 	Order
+%start          Order::Active
+%map            Order
 %%
 
 Active {
 //
-//	Event									Next State	 			Actions
+//      Event                                                                   Next State                              Actions
 //
-    addItem(item: LineItem)                 nil		                { appendOrderItem(item); }
-    finish		                            Finished				{ }
-    suspend                                 Suspended               { }
+    addItem(item: LineItem)                 nil                         { appendOrderItem(item); }
+    finish                                  Finished                    { }
+    suspend                                 Suspended                   { }
 }
 
 Finishing
@@ -29,12 +29,12 @@ Finishing
 {
 
 //
-//	Event									Next State	 			Actions
+//  Event                               Next State                      Actions
 //
-    timeout                                 [ctxt.retryCount() > 3]
-                                            Finishing               { ctxt.incRetryCount(); }
+    timeout                             [ctxt.retryCount() > 3]
+                                        Finishing                       { ctxt.incRetryCount(); }
 
-    timeout                                 Failed                  { }
+    timeout                             Failed                          { }
 }
 
 Finished {
@@ -70,9 +70,9 @@ Suspended
 //Default
 //{
 //
-// Transition	Next State	Actions
+// Transition   Next State      Actions
 //
-//Error			nil			{}
-//WriteReady    nil			{}
+//Error         nil                     {}
+//WriteReady    nil                     {}
 //}
 %%

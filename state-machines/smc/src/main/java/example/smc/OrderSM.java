@@ -2,11 +2,11 @@ package example.smc;
 
 public class OrderSM {
     private final OrderActions actions;
-    private final TakeSMContext fsm;
+    private final OrderSMContext fsm;
 
     public OrderSM(OrderActions actions) {
         this.actions = actions;
-        fsm = new TakeSMContext(this);
+        fsm = new OrderSMContext(this);
         fsm.enterStartState();
     }
 

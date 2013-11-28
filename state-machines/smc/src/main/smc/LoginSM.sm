@@ -1,0 +1,14 @@
+%class          LoginSM
+%package        example.smc
+%start          Login::Idle
+%map            Login
+%%
+
+Idle {
+//
+//  Event                               Next State                  Actions
+//
+}
+
+%%
+

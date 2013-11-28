@@ -22,8 +22,6 @@ ext.libraries = [
 // TODO - look at this plugin for JS support: http://eriwen.github.io/gradle-js-plugin/
 //
 
-
-
 //
 // Use local lib dependency since current SMC not available in maven central (Boo!)
 //
@@ -56,6 +54,27 @@ task smcJava(type: JavaExec, dependsOn: 'gensrcDirs') {
     args("${project.buildDir}/generated-src/example/smc")
     args(smcFiles.files)
 }
+
+//
+// Note: on OSX, install graphviz. This will allow you to view the .dot graphs.
+// You can convert .dot files to an image by executing
+// dot -Tpng filename.dot -o outfile.png
+//
+task smcDiagrams(type: JavaExec, dependsOn: 'gensrcDirs') {
+    def smcFiles = fileTree('src/main/smc').include('**/*.sm')
+    ext.outputPath = "${project.buildDir}/generated-src/example/smc"
+    inputs.files smcFiles
+    outputs.dir outputPath
+    classpath configurations.smc
+    main = 'net.sf.smc.Smc'
+    args('-graph')
+    args('-glevel')
+    args('1')
+    args('-d')
+    args("${project.buildDir}/generated-src/example/smc")
+    args(smcFiles.files)
+}
+
 
 sourceSets.main.java.srcDir smcJava.outputPath
 compileJava.dependsOn smcJava

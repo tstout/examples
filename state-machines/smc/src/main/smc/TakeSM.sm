@@ -1,9 +1,9 @@
 %class          OrderSM
 %package        example.smc
 //%import       your.package.name
-%start          Take::Active
+%start          Order::Active
 
-%map            Take
+%map            Order
 %%
 
 Active {
@@ -11,34 +11,18 @@ Active {
 //  Event                               Next State                  Actions
 //
     addItem(item: LineItem)             nil                         { appendOrderItem(item); }
-    finish                              Finishing                   { }
-    suspend                             Suspended                   { persistOrder(); }
-}
 
-Finishing
-    Entry {
-        startTimer(3000);
-        finishOrder();
-    }
+    finish                              [ctxt.finishOrderOK()]
+                                        Finished                    { }
 
-    Exit {
-        stopTimer();
-    }
-{
-//
-//  Event                 Next State                      Actions
-//
-    timeout               [ctxt.retryCount() < 3]
-                          Finishing                       { incRetryCount(); }
-
-    timeout               Failed                          { }
+    finish                              Failed                      { }
+    suspend                             Suspended                   { persistOrder();        }
 }
 
 Finished {
 //
 //  Event             Next State              Actions
 //
-
 }
 
 Failed {
@@ -50,7 +34,7 @@ Suspended {
     //
     //  Event   Next State  Actions
     //
-    resume      Active      {}
+    resume      Active      { }
 }
 %%
 

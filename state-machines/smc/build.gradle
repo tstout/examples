@@ -6,6 +6,7 @@ repositories {
 
 configurations {
     smc
+    rspec
 }
 
 ext.libraries = [
@@ -26,6 +27,7 @@ ext.libraries = [
 // Use local lib dependency since current SMC not available in maven central (Boo!)
 //
 dependencies {
+    rspec ('org.jruby:jruby-complete:1.6.3', )
     smc fileTree(dir: 'lib', includes: ['*.jar'])
     //smc 'net.sf.smc:smc:4.3'
     compile (
@@ -38,6 +40,26 @@ task gensrcDirs {
     ext.genSrcDir = new File("${project.buildDir}/generated-src/example/smc")
     genSrcDir.mkdirs()
 }
+
+//
+// rspec/jruby stuff...
+//
+task(gems, type: JavaExec) {
+    main = 'org.jruby.Main'
+    classpath = configurations.rspec
+    args = ['-S', 'gem', 'install', 'rspec']
+    environment['GEM_PATH'] = file('build/gems').path
+    environment['GEM_HOME'] = file('build/gems').path
+}
+
+task(spec, dependsOn: ["classes", "gems"], type: JavaExec) {
+    main = 'org.jruby.Main'
+    classpath = sourceSets.test.runtimeClasspath + configurations.rspec
+    args = ['-S', 'build/gems/bin/rspec', 'src/main/ruby/spec']
+    environment['GEM_HOME'] = file('build/gems').path
+    environment['GEM_PATH'] = file('build/gems').path
+}
+
 
 // consider using this style of args...
 //args = ['-S', 'rake', 'migrate', "RAILS_ENV=${project.getProperty('database')}"]

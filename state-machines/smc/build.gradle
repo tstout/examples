@@ -1,6 +1,5 @@
 apply plugin: 'java'
 
-
 repositories {
     mavenCentral()
 }
@@ -29,7 +28,6 @@ ext.libraries = [
 //
 dependencies {
     rspec 'org.jruby:jruby-complete:1.7.8'
-
     smc fileTree(dir: 'lib', includes: ['*.jar'])
     compile(
             fileTree(dir: 'lib', includes: ['*.jar']),
@@ -51,13 +49,13 @@ task gensrcDirs {
 //}
 
 def hasGem(gemName) {
-    new File("build/gems").list().find { it.startsWith(gemName) } != null
+    new File("${project.buildDir}/gems/gems").list().find { it.startsWith(gemName) } != null
 }
 
 task gems {
     description = 'install gems needed for jruby/rspec'
     ['rspec'].each { gem ->
-        if (hasGem(gem)) {
+        if (!hasGem(gem)) {
             javaexec {
                 main = 'org.jruby.Main'
                 classpath = configurations.rspec
@@ -70,6 +68,7 @@ task gems {
 }
 
 task(spec, dependsOn: ["classes", "gems"], type: JavaExec) {
+    description = 'Run rspec tests via jruby'
     main = 'org.jruby.Main'
     classpath = sourceSets.test.runtimeClasspath + configurations.rspec
     args = ['-S', 'build/gems/bin/rspec', 'src/main/ruby/spec']
@@ -82,7 +81,7 @@ task(spec, dependsOn: ["classes", "gems"], type: JavaExec) {
 //
 
 //
-// State Map Compiler stuff...
+// State Machine Compiler stuff...
 //
 task smcJava(type: JavaExec, dependsOn: 'gensrcDirs') {
     def smcFiles = fileTree('src/main/smc').include('**/*.sm')

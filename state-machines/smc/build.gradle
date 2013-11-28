@@ -41,6 +41,9 @@ task gensrcDirs {
     genSrcDir.mkdirs()
 }
 
+// consider using this style of args...
+//args = ['-S', 'rake', 'migrate', "RAILS_ENV=${project.getProperty('database')}"]
+//
 task smcJava(type: JavaExec, dependsOn: 'gensrcDirs') {
     def smcFiles = fileTree('src/main/smc').include('**/*.sm')
     ext.outputPath = "${project.buildDir}/generated-src/example/smc"

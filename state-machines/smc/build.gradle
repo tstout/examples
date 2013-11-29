@@ -49,6 +49,9 @@ task gensrcDirs {
 //}
 
 def hasGem(gemName) {
+    //
+    // TODO - fix this gems/gems crap...not sure at them moment why the dirs are dupliated...
+    //
     new File("${project.buildDir}/gems/gems").list().find { it.startsWith(gemName) } != null
 }
 

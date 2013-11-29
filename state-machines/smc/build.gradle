@@ -41,13 +41,6 @@ task gensrcDirs {
     genSrcDir.mkdirs()
 }
 
-//def runJRuby(cmdArg) {
-//    def cmd = "-S $cmdArg"
-//    println "Running JRuby: $cmd"
-//    Thread.currentThread().setContextClassLoader(JRuby.class.classLoader)
-//    JRuby.main("$cmd".split())
-//}
-
 def hasGem(gemName) {
     //
     // TODO - fix this gems/gems crap...not sure at them moment why the dirs are duplicated...
@@ -70,6 +63,9 @@ task gems {
     }
 }
 
+//
+// Run rspec tests...
+//
 task(spec, dependsOn: ["classes", "gems"], type: JavaExec) {
     description = 'Run rspec tests via jruby'
     main = 'org.jruby.Main'
@@ -79,46 +75,50 @@ task(spec, dependsOn: ["classes", "gems"], type: JavaExec) {
     environment['GEM_PATH'] = file('build/gems').path
 }
 
-// consider using this style of args...
-//args = ['-S', 'rake', 'migrate', "RAILS_ENV=${project.getProperty('database')}"]
-//
-
 //
 // State Machine Compiler stuff...
 //
-task smcJava(type: JavaExec, dependsOn: 'gensrcDirs') {
-    def smcFiles = fileTree('src/main/smc').include('**/*.sm')
+def smcCommon = {
     ext.outputPath = "${project.buildDir}/generated-src/example/smc"
+    ext.smcFiles = fileTree('src/main/smc').include('**/*.sm')
+    classpath configurations.smc
     inputs.files smcFiles
     outputs.dir outputPath
-    classpath configurations.smc
     main = 'net.sf.smc.Smc'
-    args('-java')
-    args('-d')
-    args("${project.buildDir}/generated-src/example/smc")
-    args(smcFiles.files)
 }
 
+task smcJava(type: JavaExec, dependsOn: 'gensrcDirs') {
+    configure smcCommon
+
+    args('-java')
+    args('-d')
+    args(ext.outputPath)
+    args(ext.smcFiles.files)
+}
+
+task smcRuby(type: JavaExec, dependsOn: 'gensrcDirs') {
+    configure smcCommon
+
+    args('-ruby')
+    args('-d')
+    args(ext.outputPath)
+    args(ext.smcFiles.files)
+}
 //
 // Note: on OSX, install graphviz. This will allow you to view the .dot graphs.
 // You can convert .dot files to an image by executing
 // dot -Tpng filename.dot -o outfile.png
 //
 task smcDiagrams(type: JavaExec, dependsOn: 'gensrcDirs') {
-    def smcFiles = fileTree('src/main/smc').include('**/*.sm')
-    ext.outputPath = "${project.buildDir}/generated-src/example/smc"
-    inputs.files smcFiles
-    outputs.dir outputPath
-    classpath configurations.smc
-    main = 'net.sf.smc.Smc'
+    configure smcCommon
+
     args('-graph')
     args('-glevel')
     args('1')
     args('-d')
-    args("${project.buildDir}/generated-src/example/smc")
-    args(smcFiles.files)
+    args(ext.outputPath)
+    args(ext.smcFiles.files)
 }
-
 
 sourceSets.main.java.srcDir smcJava.outputPath
 compileJava.dependsOn smcJava

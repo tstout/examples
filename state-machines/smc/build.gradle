@@ -37,8 +37,11 @@ dependencies {
 }
 
 task gensrcDirs {
-    ext.genSrcDir = new File("${project.buildDir}/generated-src/example/smc")
-    genSrcDir.mkdirs()
+    def baseDir = new File("${project.buildDir}/generated-src/example/smc")
+
+    ['ruby', 'java', 'graphs'].each { f ->
+        new File(baseDir, f).mkdirs()
+    }
 }
 
 def hasGem(gemName) {
@@ -80,6 +83,9 @@ task(spec, dependsOn: ["classes", "gems"], type: JavaExec) {
 //
 def smcCommon = {
     ext.outputPath = "${project.buildDir}/generated-src/example/smc"
+    ext.javaOutPath = "${ext.outputPath}/java"
+    ext.rubyOutPath = "${ext.outputPath}/ruby"
+    ext.graphOutPath = "${ext.outputPath}/graphs"
     ext.smcFiles = fileTree('src/main/smc').include('**/*.sm')
     classpath configurations.smc
     inputs.files smcFiles
@@ -92,7 +98,7 @@ task smcJava(type: JavaExec, dependsOn: 'gensrcDirs') {
 
     args('-java')
     args('-d')
-    args(ext.outputPath)
+    args(ext.javaOutPath)
     args(ext.smcFiles.files)
 }
 
@@ -101,7 +107,7 @@ task smcRuby(type: JavaExec, dependsOn: 'gensrcDirs') {
 
     args('-ruby')
     args('-d')
-    args(ext.outputPath)
+    args(ext.rubyOutPath)
     args(ext.smcFiles.files)
 }
 //
@@ -116,7 +122,7 @@ task smcDiagrams(type: JavaExec, dependsOn: 'gensrcDirs') {
     args('-glevel')
     args('1')
     args('-d')
-    args(ext.outputPath)
+    args(ext.graphOutPath)
     args(ext.smcFiles.files)
 }
 

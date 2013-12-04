@@ -29,8 +29,15 @@ require 'rubygems'
 require 'rake'
 require 'rspec/core/rake_task'
 require 'standalone_migrations'
-require 'require_all'
+#require 'load_path'
 
+$: << File.dirname(__FILE__) + '/spec'
+
+puts $:
+
+
+#require 'require_all'
+#
 #require_rel 'app/models'
 #
 # Grab all the models...

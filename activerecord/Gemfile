@@ -1,5 +1,11 @@
 source 'https://rubygems.org'
 
+group :test do
+  gem 'simplecov'
+  gem 'simplecov-rcov-text'
+  gem 'rspec_junit_formatter'
+end
+
 gem 'rake'
 gem 'rspec'
 gem 'simplecov'
@@ -8,5 +14,8 @@ gem 'standalone_migrations'
 gem 'ruby-oci8', '~> 2.1.0'
 gem 'activerecord-oracle_enhanced-adapter', '~> 1.4.0'
 gem 'require_all'
+gem 'factory_girl'
+gem 'database_cleaner'
+gem 'load_path'
 
 

@@ -1,4 +1,4 @@
-require 'rspec'
+require 'spec_helper'
 require 'rubygems'
 require 'active_record'
 require 'require_all'
@@ -6,6 +6,7 @@ require 'yaml'
 require 'logger'
 
 require_rel '../app/models'
+
 describe 'DB Connection' do
 
    before do
@@ -18,6 +19,7 @@ describe 'DB Connection' do
   it 'should connect to DB' do
     TCategory.count.should eq(0)
   end
+
 
 
 

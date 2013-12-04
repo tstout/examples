@@ -5,17 +5,21 @@ require 'require_all'
 require 'yaml'
 require 'logger'
 
+require_rel '../app/models'
 describe 'DB Connection' do
 
+   before do
+     db_config = YAML::load(File.open('db/database.yml'))
+
+     ActiveRecord::Base::establish_connection(db_config['development'])
+     ActiveRecord::Base.logger = Logger.new(STDOUT)
+   end
+
   it 'should connect to DB' do
-    db_config = YAML::load(File.open('db/database.yml'))
-
-    ActiveRecord::Base::establish_connection(db_config['development'])
-    ActiveRecord::Base.logger = Logger.new(STDOUT)
-
-    class T_Category < ActiveRecord::Base
-    end
-
-    puts T_Category.count
+    TCategory.count.should eq(0)
   end
+
+
+
+
 end

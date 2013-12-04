@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rake'
 gem 'rspec'
+gem 'simplecov'
 gem 'activerecord'
 gem 'standalone_migrations'
 gem 'ruby-oci8', '~> 2.1.0'

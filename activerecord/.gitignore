@@ -1,0 +1,25 @@
+story
+build
+tags
+app/pixate_code.rb
+resources/*.nib
+resources/*.momd
+resources/*.storyboardc
+.DS_Store
+nbproject
+.redcar
+#*#
+*~
+*.sw[po]
+.eprj
+.sass-cache
+.idea
+.dat*
+vendor/Pods/
+vendor/cache/
+*.o
+*.a
+*.bridgesupport
+build-iPhoneOS/
+build-iPhoneSimulator/
+source 'https://rubygems.org'

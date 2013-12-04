@@ -1,0 +1,39 @@
+development: &default
+  adapter: oracle_enhanced
+  database: xe
+  host: linuxdev
+  port: 1521
+  username: merch_development
+  password: passwd
+  pool: 5
+  timeout: 5000
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test: &test
+  <<: *default
+  username: merch_test
+  password: passwd
+
+production:
+  <<: *default
+  username: merch_production
+  password: passwd
+
+
+mms_development:
+  <<: *default
+  database: mmsd.acme.com
+  host: labdevdb1.acme.com
+  username: mmsmgr
+  password: passwd
+
+mms_test:
+  <<: *test
+
+mms_production:
+  database: mmsd.acme.com
+  host: labdevdb1.acme.com
+  username: mmsmgr
+  password: passwd

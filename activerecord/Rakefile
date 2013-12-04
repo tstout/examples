@@ -1,0 +1,47 @@
+#
+# Info and src for StandaloneMigrations: https://github.com/thuss/standalone-migrations
+#
+# Creating a new migration
+# rake db:new_migration name=foo_bar_migration
+# edit db/migrate/20081220234130_foo_bar_migration.rb
+#
+# Apply latest migration
+#
+# rake db:migrate
+#
+# Migrate to a specific version
+#
+# rake db:migrate VERSION=20131203184957
+#
+# Migrate a specific database:
+#
+# rake db:migrate DB=test ... or ...
+# rake db:migrate RAILS_ENV=test
+#
+# Revert last migration
+#
+# rake db:rollback
+#
+# Revert last 3 migrations
+# rake db:rollback STEP=3
+#
+require 'rubygems'
+require 'rake'
+require 'rspec/core/rake_task'
+require 'standalone_migrations'
+require 'require_all'
+
+#require_rel 'app/models'
+#
+# Grab all the models...
+#
+#Dir[File.dirname(__FILE__) + '/app/models/*.rb'].each {|file| require file }
+
+RSpec::Core::RakeTask.new(:spec)
+
+task :default  => :spec
+
+StandaloneMigrations::Tasks.load_tasks
+
+
+

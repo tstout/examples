@@ -10,7 +10,7 @@ require_rel '../app/models'
 describe 'DB Connection' do
 
    before do
-     db_config = YAML::load(File.open('db/database.yml'))
+     db_config = YAML::load(File.open('db/config.yml'))
 
      ActiveRecord::Base::establish_connection(db_config['development'])
      ActiveRecord::Base.logger = Logger.new(STDOUT)

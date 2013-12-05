@@ -20,8 +20,4 @@ describe 'DB Connection' do
     TCategory.count.should eq(0)
   end
 
-
-
-
-
 end

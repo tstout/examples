@@ -29,20 +29,14 @@ require 'rubygems'
 require 'rake'
 require 'rspec/core/rake_task'
 require 'standalone_migrations'
-#require 'load_path'
 
-$: << File.dirname(__FILE__) + '/spec'
-
-puts $:
-
-
-#require 'require_all'
 #
-#require_rel 'app/models'
+# Configure load path for this small project...
+# TODO - this is not working for app/models dir, but ok for spec
 #
-# Grab all the models...
-#
-#Dir[File.dirname(__FILE__) + '/app/models/*.rb'].each {|file| require file }
+%w{spec app/models}.each do |dir|
+  $:.unshift "#{File.dirname(__FILE__)}/#{dir}"
+end
 
 RSpec::Core::RakeTask.new(:spec)
 

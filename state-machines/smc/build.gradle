@@ -24,10 +24,17 @@ ext.libraries = [
 //
 
 //
-// Use local lib dependency since current SMC not available in maven central (Boo!)
+// Use local lib dependency since current State Machine Compiler is not
+// available in maven central (Boo!)
 //
 dependencies {
+
+//    def genCodeDir = "${project.buildDir}/generated-src/example/smc"
+//
+//    println "dependencies --- ${fileTree(dir: "${genCodeDir}/ruby", includes: ['*.rb'])}"
+
     rspec 'org.jruby:jruby-complete:1.7.8'
+
     smc fileTree(dir: 'lib', includes: ['*.jar'])
     compile(
             fileTree(dir: 'lib', includes: ['*.jar']),
@@ -46,7 +53,7 @@ task gensrcDirs {
 
 def hasGem(gemName) {
     //
-    // TODO - fix this gems/gems crap...not sure at them moment why the dirs are duplicated...
+    // TODO - fix this gems/gems crap...not sure at the moment why the dirs need to be duplicated...
     //
     new File("${project.buildDir}/gems/gems").list().find { it.startsWith(gemName) } != null
 }
@@ -76,6 +83,14 @@ task(spec, dependsOn: ["classes", "gems"], type: JavaExec) {
     args = ['-S', 'build/gems/bin/rspec', 'src/main/ruby/spec']
     environment['GEM_HOME'] = file('build/gems').path
     environment['GEM_PATH'] = file('build/gems').path
+    //
+    // Tell JRuby where to find rb files to satisfy require
+    // TODO - need to handle Ruby's module name requirement in generated spec
+    // Looks like you cannot reasonably do one .sm file for multiple languages.
+    // Need to put each .sm file into separate dir based on language.
+    // Also, see about cleaning up this path statement (maybe an [].each ?)
+    //
+    environment['RUBYOPT'] = "-I${file('lib/ruby').path}:${file('build/generated-src/example/smc/ruby')}"
 }
 
 //
@@ -110,6 +125,7 @@ task smcRuby(type: JavaExec, dependsOn: 'gensrcDirs') {
     args(ext.rubyOutPath)
     args(ext.smcFiles.files)
 }
+
 //
 // Note: on OSX, install graphviz. This will allow you to view the .dot graphs.
 // You can convert .dot files to an image by executing

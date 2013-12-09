@@ -1,5 +1,5 @@
 %class          LoginSM
-%package        example.smc
+%package        ExampleSmc
 %start          Login::Idle
 %map            Login
 %%

@@ -1,7 +1,7 @@
 require 'rspec'
 require 'statemap'
 
-require 'LoginSM_sm'
+require 'Login_sm'
 
 describe 'My behaviour' do
 

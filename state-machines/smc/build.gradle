@@ -76,7 +76,7 @@ task gems {
 //
 // Run rspec tests...
 //
-task(spec, dependsOn: ["classes", "gems"], type: JavaExec) {
+task(spec, dependsOn: ["classes", "gems", "smcRuby"], type: JavaExec) {
     description = 'Run rspec tests via jruby'
     main = 'org.jruby.Main'
     classpath = sourceSets.test.runtimeClasspath + configurations.rspec
@@ -114,7 +114,7 @@ task smcJava(type: JavaExec, dependsOn: 'gensrcDirs') {
     args('-java')
     args('-d')
     args(ext.javaOutPath)
-    args(ext.smcFiles.files)
+    args(fileTree('src/main/smc/java').include('**/*.sm'))
 }
 
 task smcRuby(type: JavaExec, dependsOn: 'gensrcDirs') {
@@ -123,7 +123,7 @@ task smcRuby(type: JavaExec, dependsOn: 'gensrcDirs') {
     args('-ruby')
     args('-d')
     args(ext.rubyOutPath)
-    args(ext.smcFiles.files)
+    args(fileTree('src/main/smc/ruby').include('**/*.sm'))
 }
 
 //

@@ -28,11 +28,6 @@ ext.libraries = [
 // available in maven central (Boo!)
 //
 dependencies {
-
-//    def genCodeDir = "${project.buildDir}/generated-src/example/smc"
-//
-//    println "dependencies --- ${fileTree(dir: "${genCodeDir}/ruby", includes: ['*.rb'])}"
-
     rspec 'org.jruby:jruby-complete:1.7.8'
 
     smc fileTree(dir: 'lib', includes: ['*.jar'])
@@ -44,7 +39,7 @@ dependencies {
 }
 
 task gensrcDirs {
-    def baseDir = new File("${project.buildDir}/generated-src/example/smc")
+    def baseDir = new File("${project.buildDir}/generated-src")
 
     ['ruby', 'java', 'graphs'].each { f ->
         new File(baseDir, f).mkdirs()
@@ -76,7 +71,7 @@ task gems {
 //
 // Run rspec tests...
 //
-task(spec, dependsOn: ["classes", "gems", "smcRuby"], type: JavaExec) {
+task(spec, dependsOn: ['classes', 'gems', 'smcRuby'], type: JavaExec) {
     description = 'Run rspec tests via jruby'
     main = 'org.jruby.Main'
     classpath = sourceSets.test.runtimeClasspath + configurations.rspec
@@ -85,19 +80,16 @@ task(spec, dependsOn: ["classes", "gems", "smcRuby"], type: JavaExec) {
     environment['GEM_PATH'] = file('build/gems').path
     //
     // Tell JRuby where to find rb files to satisfy require
-    // TODO - need to handle Ruby's module name requirement in generated spec
-    // Looks like you cannot reasonably do one .sm file for multiple languages.
-    // Need to put each .sm file into separate dir based on language.
-    // Also, see about cleaning up this path statement (maybe an [].each ?)
+    // See about cleaning up this path statement (maybe an [].each ?)
     //
-    environment['RUBYOPT'] = "-I${file('lib/ruby').path}:${file('build/generated-src/example/smc/ruby')}"
+    environment['RUBYOPT'] = "-I${file('lib/ruby').path}:${file('build/generated-src/ruby')}"
 }
 
 //
 // State Machine Compiler stuff...
 //
 def smcCommon = {
-    ext.outputPath = "${project.buildDir}/generated-src/example/smc"
+    ext.outputPath = "${project.buildDir}/generated-src"
     ext.javaOutPath = "${ext.outputPath}/java"
     ext.rubyOutPath = "${ext.outputPath}/ruby"
     ext.graphOutPath = "${ext.outputPath}/graphs"

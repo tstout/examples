@@ -6,7 +6,7 @@ repositories {
 
 configurations {
     smc
-    rspec
+    jruby
 }
 
 ext.libraries = [
@@ -28,7 +28,7 @@ ext.libraries = [
 // available in maven central (Boo!)
 //
 dependencies {
-    rspec 'org.jruby:jruby-complete:1.7.8'
+    jruby 'org.jruby:jruby-complete:1.7.8'
 
     smc fileTree(dir: 'lib', includes: ['*.jar'])
     compile(
@@ -54,12 +54,12 @@ def hasGem(gemName) {
 }
 
 task gems {
-    description = 'install gems needed for jruby/rspec'
-    ['rspec'].each { gem ->
+    description = 'install gems needed for jruby'
+    ['rspec', 'minitest'].each { gem ->
         if (!hasGem(gem)) {
             javaexec {
                 main = 'org.jruby.Main'
-                classpath = configurations.rspec
+                classpath = configurations.jruby
                 args = ['-S', 'gem', 'install', gem]
                 environment['GEM_PATH'] = file('build/gems').path
                 environment['GEM_HOME'] = file('build/gems').path
@@ -68,14 +68,45 @@ task gems {
     }
 }
 
+task (runLogin, dependsOn: ['gems'], type: JavaExec) {
+    description = 'run sample Login UI via JRuby'
+    main = 'org.jruby.Main'
+    classpath = sourceSets.test.runtimeClasspath + configurations.jruby
+    args = ['--2.0', 'src/main/ruby/lib/login_window.rb']
+    environment['GEM_HOME'] = file('build/gems').path
+    environment['GEM_PATH'] = file('build/gems').path
+    //
+    // Tell JRuby where to find rb files to satisfy require
+    // See about cleaning up this path statement (maybe an [].each ?)
+    //
+    environment['RUBYOPT'] = "-I${file('lib/ruby').path}:${file('build/generated-src/ruby')}"
+}
+
 //
 // Run rspec tests...
 //
 task(spec, dependsOn: ['classes', 'gems', 'smcRuby'], type: JavaExec) {
     description = 'Run rspec tests via jruby'
     main = 'org.jruby.Main'
-    classpath = sourceSets.test.runtimeClasspath + configurations.rspec
+    classpath = sourceSets.test.runtimeClasspath + configurations.jruby
     args = ['-S', 'build/gems/bin/rspec', 'src/main/ruby/spec']
+    environment['GEM_HOME'] = file('build/gems').path
+    environment['GEM_PATH'] = file('build/gems').path
+    //
+    // Tell JRuby where to find rb files to satisfy require
+    // See about cleaning up this path statement (maybe an [].each ?)
+    //
+    environment['RUBYOPT'] = "-I${file('lib/ruby').path}:${file('build/generated-src/ruby')}"
+}
+
+//
+// Run minitest...
+//
+task(minitest, dependsOn: "classes gems smcRuby".split(), type: JavaExec) {
+    description = 'Run minitest via jruby'
+    main = 'org.jruby.Main'
+    classpath = sourceSets.test.runtimeClasspath + configurations.jruby
+    args = ['--2.0', 'src/main/ruby/test/test_login.rb']
     environment['GEM_HOME'] = file('build/gems').path
     environment['GEM_PATH'] = file('build/gems').path
     //

@@ -18,7 +18,10 @@
 \usepackage{microtype}
 \usepackage[T1]{fontenc}
 \usepackage[scaled]{beramono}
-
+%\usepackage[rgb,dvipsnames]{xcolor}
+\usepackage{xcolor}
+%\usepackage[rgb,dvipsnames]{xcolor}
+%\usepackage{xcolor}
 
 %\newfontfamily\listingsfont[Scale=0.7]{Courier} 
 %\newfontfamily\listingsfontinline[Scale=0.8]{Courier New} 
@@ -28,7 +31,7 @@
 
 \usetikzlibrary{automata,positioning}
 \hypersetup{colorlinks=true,linkcolor=blue}
-
+\definecolor{OliveGreen}{rgb}{0,0.6,0}
 %\newfontfamily\listingsfont[Scale=0.7]{Courier} 
 %\newfontfamily\listingsfontinline[Scale=0.8]{Courier New}
 
@@ -146,7 +149,7 @@ for (int i = 0; i < 20; i++) {
   numberstyle=\tiny\color{gray},
   keywordstyle=\color{blue},
   commentstyle=\color{orange},
-  stringstyle=\color{mauve},
+  stringstyle=\color{OliveGreen},
   breaklines=false,
   breakatwhitespace=false
   tabsize=2

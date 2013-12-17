@@ -5,6 +5,10 @@ java_import java.awt.Dimension
 java_import javax.swing.JButton
 java_import javax.swing.JFrame
 
+#
+# A few comments
+#
+
 class ClickAction
   include ActionListener
 

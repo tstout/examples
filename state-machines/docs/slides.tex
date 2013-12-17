@@ -15,8 +15,24 @@
 \usepackage{hyperref}
 \usepackage{graphicx}                                 % Table resizing
 \usepackage{tabularx}
+\usepackage{microtype}
+\usepackage[T1]{fontenc}
+\usepackage[scaled]{beramono}
+
+
+%\newfontfamily\listingsfont[Scale=0.7]{Courier} 
+%\newfontfamily\listingsfontinline[Scale=0.8]{Courier New} 
+
+\newcommand\Small{\fontsize{5}{5.2}\selectfont}
+\newcommand*\LSTfont{\Small\ttfamily\SetTracking{encoding=*}{-60}\lsstyle}
+
 \usetikzlibrary{automata,positioning}
 \hypersetup{colorlinks=true,linkcolor=blue}
+
+%\newfontfamily\listingsfont[Scale=0.7]{Courier} 
+%\newfontfamily\listingsfontinline[Scale=0.8]{Courier New}
+
+%  basicstyle={\ttfamily\tiny},
 
 %
 % Research Notes:
@@ -59,6 +75,7 @@
 November 2013
 
 \end{frame}
+
 %
 % Introduction
 %
@@ -99,7 +116,7 @@ November 2013
   \end{itemize} 
 \end{frame}
 
-%http://media.pragprog.com/articles/nov_02_state.pdf
+%http://media.pragprxog.com/articles/nov_02_state.pdf
 
 \begin{frame}[fragile]
   \frametitle{How?}
@@ -115,6 +132,43 @@ for (int i = 0; i < 20; i++) {
   \frametitle{SMC Distinguishing Features}
   
 \end{frame}
+
+%\lstset{ columns=fullflexible with basicstyle=\tiny\sffamily, language=ruby}
+\lstset{frame=tb,
+  language=Ruby,
+  aboveskip=1mm,
+  belowskip=1mm,
+  showstringspaces=false,
+  keepspaces=true
+  columns=fullflexible,
+  basicstyle={\LSTfont},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{orange},
+  stringstyle=\color{mauve},
+  breaklines=false,
+  breakatwhitespace=false
+  tabsize=2
+}
+\begin{frame}[fragile]
+  \frametitle{How?}
+Ruby Matrix Example
+%\begin{lstlisting}
+\lstinputlisting{ruby_state_matrix.rb} 
+%\end{lstlisting}
+
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{SMC Distinguishing Features}
+  
+\end{frame}
+
+
+
 
 
 %

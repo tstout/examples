@@ -41,8 +41,8 @@ dependencies {
 task gensrcDirs {
     def baseDir = new File("${project.buildDir}/generated-src")
 
-    ['ruby', 'java', 'graphs'].each { f ->
-        new File(baseDir, f).mkdirs()
+    ['ruby', 'java', 'graphs'].each { dir ->
+        new File(baseDir, dir).mkdirs()
     }
 }
 
@@ -68,11 +68,9 @@ task gems {
     }
 }
 
-task (runLogin, dependsOn: ['gems'], type: JavaExec) {
-    description = 'run sample Login UI via JRuby'
+def jrubyCommon = {
     main = 'org.jruby.Main'
     classpath = sourceSets.test.runtimeClasspath + configurations.jruby
-    args = ['--2.0', 'src/main/ruby/lib/login_window.rb']
     environment['GEM_HOME'] = file('build/gems').path
     environment['GEM_PATH'] = file('build/gems').path
     //
@@ -80,40 +78,30 @@ task (runLogin, dependsOn: ['gems'], type: JavaExec) {
     // See about cleaning up this path statement (maybe an [].each ?)
     //
     environment['RUBYOPT'] = "-I${file('lib/ruby').path}:${file('build/generated-src/ruby')}"
+}
+
+task(runLogin, dependsOn: ['gems'], type: JavaExec) {
+    configure jrubyCommon
+    description = 'run sample Login UI via JRuby'
+    args = ['--2.0', 'src/main/ruby/lib/login_window.rb']
 }
 
 //
 // Run rspec tests...
 //
 task(spec, dependsOn: ['classes', 'gems', 'smcRuby'], type: JavaExec) {
+    configure jrubyCommon
     description = 'Run rspec tests via jruby'
-    main = 'org.jruby.Main'
-    classpath = sourceSets.test.runtimeClasspath + configurations.jruby
     args = ['-S', 'build/gems/bin/rspec', 'src/main/ruby/spec']
-    environment['GEM_HOME'] = file('build/gems').path
-    environment['GEM_PATH'] = file('build/gems').path
-    //
-    // Tell JRuby where to find rb files to satisfy require
-    // See about cleaning up this path statement (maybe an [].each ?)
-    //
-    environment['RUBYOPT'] = "-I${file('lib/ruby').path}:${file('build/generated-src/ruby')}"
 }
 
 //
 // Run minitest...
 //
 task(minitest, dependsOn: "classes gems smcRuby".split(), type: JavaExec) {
+    configure jrubyCommon
     description = 'Run minitest via jruby'
-    main = 'org.jruby.Main'
-    classpath = sourceSets.test.runtimeClasspath + configurations.jruby
     args = ['--2.0', 'src/main/ruby/test/test_login.rb']
-    environment['GEM_HOME'] = file('build/gems').path
-    environment['GEM_PATH'] = file('build/gems').path
-    //
-    // Tell JRuby where to find rb files to satisfy require
-    // See about cleaning up this path statement (maybe an [].each ?)
-    //
-    environment['RUBYOPT'] = "-I${file('lib/ruby').path}:${file('build/generated-src/ruby')}"
 }
 
 //

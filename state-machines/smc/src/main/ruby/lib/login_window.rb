@@ -13,7 +13,7 @@ class ClickAction
   include ActionListener
 
   def actionPerformed(event)
-    puts 'Button got clicked'
+    puts 'Button clicked'
   end
 end
 

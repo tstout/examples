@@ -46,27 +46,27 @@ task gensrcDirs {
     }
 }
 
-def hasGem(gemName) {
-    //
-    // TODO - fix this gems/gems crap...not sure at the moment why the dirs need to be duplicated...
-    //
-    new File("${project.buildDir}/gems/gems").list().find { it.startsWith(gemName) } != null
-}
-
-task gems {
-    description = 'install gems needed for jruby'
-    ['rspec', 'minitest'].each { gem ->
-        if (!hasGem(gem)) {
-            javaexec {
-                main = 'org.jruby.Main'
-                classpath = configurations.jruby
-                args = ['-S', 'gem', 'install', gem]
-                environment['GEM_PATH'] = file('build/gems').path
-                environment['GEM_HOME'] = file('build/gems').path
-            }
-        }
-    }
-}
+//def hasGem(gemName) {
+//    //
+//    // TODO - fix this gems/gems crap...not sure at the moment why the dirs need to be duplicated...
+//    //
+//    new File("${project.buildDir}/gems/gems").list().find { it.startsWith(gemName) } != null
+//}
+//
+//task gems {
+//    description = 'install gems needed for jruby'
+//    ['rspec', 'minitest', 'minitest-reporters'].each { gem ->
+//        if (!hasGem(gem)) {
+//            javaexec {
+//                main = 'org.jruby.Main'
+//                classpath = configurations.jruby
+//                args = ['-S', 'gem', 'install', gem]
+//                environment['GEM_PATH'] = file('build/gems').path
+//                environment['GEM_HOME'] = file('build/gems').path
+//            }
+//        }
+//    }
+//}
 
 def jrubyCommon = {
     main = 'org.jruby.Main'

@@ -4,3 +4,13 @@ task 'create-dirs' << {
    sourceSets*.java.srcDirs*.each { it.mkdirs() }
    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
 }
+
+
+//
+// Run minitest...
+//
+task rubyBasicTests(dependsOn: "classes gems".split(), type: JavaExec) {
+    configure jrubyCommon
+    description = 'Run ruby basic tests'
+    args = ['--2.0', 'src/test/ruby/app_state_test.rb']
+}

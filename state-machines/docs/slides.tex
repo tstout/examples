@@ -1,14 +1,6 @@
 \documentclass{beamer}
 
 \usetheme{Warsaw}    
-%\usetheme{Dresden}                  % looks pretty good
-%\usetheme{Frankfurt}                % +1
-%\usetheme{Goettingen}             % +1 simple and clean
-%\usetheme{Ilmenau}                    % +1 bright
-%\usetheme{Luebeck}                 % +1 can't tell much diff from warsaw
-%\usetheme{Madrid}                   % +1 like warsaw, but date footer
-%\usetheme{Malmoe}                  % Like warsaw, but not header colors
-%\usetheme{Singapore}               % +1 minimal and clean
                         
 \usepackage{tikz}                                         % SM Diagramming stuff
 \usepackage{listings}                                   % Source code formatting
@@ -18,13 +10,8 @@
 \usepackage{microtype}
 \usepackage[T1]{fontenc}
 \usepackage[scaled]{beramono}
-%\usepackage[rgb,dvipsnames]{xcolor}
-\usepackage{xcolor}
-%\usepackage[rgb,dvipsnames]{xcolor}
-%\usepackage{xcolor}
 
-%\newfontfamily\listingsfont[Scale=0.7]{Courier} 
-%\newfontfamily\listingsfontinline[Scale=0.8]{Courier New} 
+\usepackage{xcolor}
 
 \newcommand\Small{\fontsize{5}{5.2}\selectfont}
 \newcommand*\LSTfont{\Small\ttfamily\SetTracking{encoding=*}{-60}\lsstyle}
@@ -32,8 +19,7 @@
 \usetikzlibrary{automata,positioning}
 \hypersetup{colorlinks=true,linkcolor=blue}
 \definecolor{OliveGreen}{rgb}{0,0.6,0}
-%\newfontfamily\listingsfont[Scale=0.7]{Courier} 
-%\newfontfamily\listingsfontinline[Scale=0.8]{Courier New}
+
 
 %  basicstyle={\ttfamily\tiny},
 
@@ -49,7 +35,7 @@
 % Here's an example of using metapost uml:
 % http://rxwen.blogspot.com/2010/11/draw-uml-with-latex.html
 %
-
+%
 \begin{document}
 \include{variables}
 %
@@ -75,7 +61,7 @@
       
     \end{center}
 
-November 2013
+January 2014
 
 \end{frame}
 
@@ -163,15 +149,19 @@ Ruby Matrix Example
 
 \end{frame}
 
+\begin{frame}
+\frametitle{Another SM Representation}
 
+\end{frame}
 
 \begin{frame}
   \frametitle{SMC Distinguishing Features}
-  
+  \begin{itemize}
+    \item External DSL
+    \item Generates code for many languages
+    \item DSL allows representation in compact, readable format
+   \end{itemize}
 \end{frame}
-
-
-
 
 
 %

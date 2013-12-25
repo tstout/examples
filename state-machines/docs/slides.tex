@@ -17,7 +17,7 @@
 \newcommand*\LSTfont{\Small\ttfamily\SetTracking{encoding=*}{-60}\lsstyle}
 
 \usetikzlibrary{automata,positioning}
-\hypersetup{colorlinks=true,linkcolor=blue}
+\hypersetup{colorlinks=color, linkcolor=black}
 \definecolor{OliveGreen}{rgb}{0,0.6,0}
 
 
@@ -119,7 +119,11 @@ for (int i = 0; i < 20; i++) {
 
 \begin{frame}
   \frametitle{SMC Distinguishing Features}
-  
+  \begin{itemize}
+  \item External DSL
+  \item Generates State Pattern for many languages
+  \item Graph viz support
+\end{itemize}
 \end{frame}
 
 %\lstset{ columns=fullflexible with basicstyle=\tiny\sffamily, language=ruby}
@@ -142,10 +146,14 @@ for (int i = 0; i < 20; i++) {
 }
 \begin{frame}[fragile]
   \frametitle{How?}
-Ruby Matrix Example
-%\begin{lstlisting}
-\lstinputlisting{ruby_state_matrix.rb} 
-%\end{lstlisting}
+  Ruby Matrix Example
+
+  \lstinputlisting{ruby_state_matrix.rb} 
+
+\href{https://github.com/tstout/examples/blob/master/state-machines/basic/src/main/ruby/app_state.rb}{\textit{github
+    source
+-}}
+\href{https://github.com/tstout/examples/blob/master/state-machines/basic/src/test/ruby/app_state_test.rb}{\textit{unit test}}
 
 \end{frame}
 

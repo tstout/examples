@@ -16,14 +16,6 @@ subprojects {
         jruby 'org.jruby:jruby-complete:1.7.8'
     }
 
-    // TODO - need to set the gem env to common dir.
-
-    task dumpRootProps {
-        println 'project: ' + project.path
-        println 'projectDir: ' + projectDir
-        //println 'srcDirName: ' + srcDirName
-    }
-
     jrubyCommon = {
         main = 'org.jruby.Main'
         classpath = sourceSets.test.runtimeClasspath + configurations.jruby

@@ -6,6 +6,7 @@ class AppStateTest < MiniTest::Test
 
   def test_verify_actions_called
     mock = MiniTest::Mock.new
+
     [:go_offline, :go_online, :enable_ui]
       .each { |action| mock.expect(action, nil) }
 

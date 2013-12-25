@@ -5,13 +5,13 @@ task 'create-dirs' << {
    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
 }
 
-task dumpBasicRootProps {
-    println 'project: ' + project.path
-    println 'projectDir: ' + projectDir
-    println 'rootProject:' + rootProject
-    println 'rootDir:' + rootDir + '/gems'
-    //println 'srcDirName: ' + srcDirName
-}
+//task dumpBasicRootProps {
+//    println 'project: ' + project.path
+//    println 'projectDir: ' + projectDir
+//    println 'rootProject:' + rootProject
+//    println 'rootDir:' + rootDir + '/gems'
+//    //println 'srcDirName: ' + srcDirName
+//}
 
 //
 // Run minitest...

@@ -46,40 +46,6 @@ task gensrcDirs {
     }
 }
 
-//def hasGem(gemName) {
-//    //
-//    // TODO - fix this gems/gems crap...not sure at the moment why the dirs need to be duplicated...
-//    //
-//    new File("${project.buildDir}/gems/gems").list().find { it.startsWith(gemName) } != null
-//}
-//
-//task gems {
-//    description = 'install gems needed for jruby'
-//    ['rspec', 'minitest', 'minitest-reporters'].each { gem ->
-//        if (!hasGem(gem)) {
-//            javaexec {
-//                main = 'org.jruby.Main'
-//                classpath = configurations.jruby
-//                args = ['-S', 'gem', 'install', gem]
-//                environment['GEM_PATH'] = file('build/gems').path
-//                environment['GEM_HOME'] = file('build/gems').path
-//            }
-//        }
-//    }
-//}
-
-//def jrubyCommon = {
-//    main = 'org.jruby.Main'
-//    classpath = sourceSets.test.runtimeClasspath + configurations.jruby
-//    environment['GEM_HOME'] = file('build/gems').path
-//    environment['GEM_PATH'] = file('build/gems').path
-//    //
-//    // Tell JRuby where to find rb files to satisfy require
-//    // See about cleaning up this path statement (maybe an [].each ?)
-//    //
-//    environment['RUBYOPT'] = "-I${file('lib/ruby').path}:${file('build/generated-src/ruby')}"
-//}
-
 task(runLogin, dependsOn: ['gems'], type: JavaExec) {
     configure jrubyCommon
     description = 'run sample Login UI via JRuby'

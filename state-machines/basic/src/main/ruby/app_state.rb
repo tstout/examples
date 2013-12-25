@@ -3,7 +3,7 @@ class AppState
   ONLINE_ST    = 1
   EXCEPTION_ST = 2
 
-  @state_matrix = {
+  @@state_matrix = {
       #Event          Offline Action/Next State      Online Action/Next State      Exception Action/Next State
       offline_evt:    [[:go_offline, nil],           [:go_offline,  OFFLINE_ST],   [:enable_ui, EXCEPTION_ST]],
       online_evt:     [[:go_online,  ONLINE_ST],     [nil,          nil],          [nil,        nil]],
@@ -15,16 +15,16 @@ class AppState
     @current_state = OFFLINE_ST
   end
 
-  def self.state_matrix
-    @state_matrix
-  end
-
-  def state_matrix
-    self.class.state_matrix
-  end
+  #def self.state_matrix
+  #  @state_matrix
+  #end
+  #
+  #def state_matrix
+  #  self.class.state_matrix
+  #end
 
   def lookup(event_sym)
-    state_matrix[event_sym][@current_state]
+    @@state_matrix[event_sym][@current_state]
   end
 
   def process_event(event_sym)

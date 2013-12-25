@@ -4,10 +4,10 @@ repositories {
     mavenCentral()
 }
 
-configurations {
-    smc
-    jruby
-}
+//configurations {
+//    smc
+////    jruby
+//}
 
 ext.libraries = [
         runtime_core: [
@@ -68,17 +68,17 @@ task gensrcDirs {
 //    }
 //}
 
-def jrubyCommon = {
-    main = 'org.jruby.Main'
-    classpath = sourceSets.test.runtimeClasspath + configurations.jruby
-    environment['GEM_HOME'] = file('build/gems').path
-    environment['GEM_PATH'] = file('build/gems').path
-    //
-    // Tell JRuby where to find rb files to satisfy require
-    // See about cleaning up this path statement (maybe an [].each ?)
-    //
-    environment['RUBYOPT'] = "-I${file('lib/ruby').path}:${file('build/generated-src/ruby')}"
-}
+//def jrubyCommon = {
+//    main = 'org.jruby.Main'
+//    classpath = sourceSets.test.runtimeClasspath + configurations.jruby
+//    environment['GEM_HOME'] = file('build/gems').path
+//    environment['GEM_PATH'] = file('build/gems').path
+//    //
+//    // Tell JRuby where to find rb files to satisfy require
+//    // See about cleaning up this path statement (maybe an [].each ?)
+//    //
+//    environment['RUBYOPT'] = "-I${file('lib/ruby').path}:${file('build/generated-src/ruby')}"
+//}
 
 task(runLogin, dependsOn: ['gems'], type: JavaExec) {
     configure jrubyCommon

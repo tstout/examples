@@ -5,24 +5,13 @@ task 'create-dirs' << {
    sourceSets*.resources.srcDirs*.each { it.mkdirs() }
 }
 
-//task dumpBasicRootProps {
-//    println 'project: ' + project.path
-//    println 'projectDir: ' + projectDir
-//    println 'rootProject:' + rootProject
-//    println 'rootDir:' + rootDir + '/gems'
-//    //println 'srcDirName: ' + srcDirName
-//}
-
 //
 // Run minitest...
 //
 task rubyBasicTests(dependsOn: "classes gems".split(), type: JavaExec) {
     configure jrubyCommon
+
     environment['RUBYOPT'] = "-I${projectDir}/src/main/ruby"
-
-    println "RUBYOPT = ${environment['RUBYOPT']}"
-
-
     description = 'Run ruby basic tests'
     args = ['--2.0', 'src/test/ruby/app_state_test.rb']
 }

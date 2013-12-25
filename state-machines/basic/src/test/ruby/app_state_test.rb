@@ -4,18 +4,16 @@ require 'app_state'
 
 class AppStateTest < MiniTest::Test
 
-  def setup
-  end
-
-  def teardown
-  end
-
-  # Fake test
-  def test_fail
+  def test_verify_actions_called
     mock = MiniTest::Mock.new
-    mock.expect(:go_offline, nil)
-    appState = AppState.new(mock)
-    appState.process_event(:offline_evt)
+    [:go_offline, :go_online, :enable_ui]
+      .each { |action| mock.expect(action, nil) }
+
+    app_state = AppState.new(mock)
+
+    [:online_evt, :offline_evt, :exception_evt]
+      .each { |evt| app_state.process_event(evt) }
+
     assert mock.verify
   end
 end

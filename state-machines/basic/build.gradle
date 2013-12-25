@@ -18,9 +18,11 @@ task 'create-dirs' << {
 //
 task rubyBasicTests(dependsOn: "classes gems".split(), type: JavaExec) {
     configure jrubyCommon
-//    configure {
-//        appendRubyInclude("${projectDir}/src/main/ruby/*.rb}")
-//    }
+    environment['RUBYOPT'] = "-I${projectDir}/src/main/ruby"
+
+    println "RUBYOPT = ${environment['RUBYOPT']}"
+
+
     description = 'Run ruby basic tests'
     args = ['--2.0', 'src/test/ruby/app_state_test.rb']
 }

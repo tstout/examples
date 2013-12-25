@@ -1,5 +1,6 @@
 gem 'minitest'
 require 'minitest/autorun'
+require 'app_state'
 
 class AppStateTest < MiniTest::Test
 
@@ -11,8 +12,10 @@ class AppStateTest < MiniTest::Test
 
   # Fake test
   def test_fail
-
-    skip
-    #fail('Not implemented')
+    mock = MiniTest::Mock.new
+    mock.expect(:go_offline, nil)
+    appState = AppState.new(mock)
+    appState.process_event(:offline_evt)
+    assert mock.verify
   end
 end

@@ -2,11 +2,6 @@ def hasGem(gemName) {
     new File("${rootDir}/gems").list().find { it.startsWith(gemName) } != null
 }
 
-def appendRubyInclude(incDir) {
-    environment['RUBYOPT'] += ":${incDir}"
-}
-
-
 subprojects {
     repositories {
         mavenCentral()

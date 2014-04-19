@@ -1,10 +1,10 @@
 \documentclass{beamer}
 
 \usetheme{Warsaw}    
-                        
-\usepackage{listings}                                   % Source code formatting
+
+\usepackage{listings}                                   
 \usepackage{hyperref}
-\usepackage{graphicx}                                 % Table resizing
+\usepackage{graphicx}                                 
 \usepackage{tabularx}
 \usepackage{microtype}
 \usepackage[T1]{fontenc}
@@ -19,28 +19,52 @@
 \definecolor{OliveGreen}{rgb}{0,0.6,0}
 \graphicspath{{./images/}}
 
+\input{lst-config/clojure-config}
 \begin{document}
+
 
 \begin{frame}
   \frametitle{Clojure Intro}
   \center{
-  \includegraphics[scale=.40]{Clojure-Logo}
+    \includegraphics[scale=.40]{Clojure-Logo}
   }
 
-June 2014
+  June 2014
 
 \end{frame}
 
 \frame{
   \frametitle{A Brief History of Lisp}
-  \includegraphics[scale=.60]{john-mccarthy}
-  \itemize{
-  \item Created by John McCarthy 1956
-   }
+  \begin{columns}
+    \begin{column}{.49\textwidth}
+      \includegraphics[scale=.60]{john-mccarthy}
+    \end{column}
+    \begin{column}{.49\textwidth}
+      \itemize{
+      \item John McCarthy 1958
+      }
+    \end{column}
+  \end{columns}
+}
+
+\frame{
+  \frametitle{Scheme 1975-1980}
+  \begin{columns}
+    \begin{column}{.49\textwidth}
+      Guy Steele
+      \includegraphics[scale=.25]{guy-steele}
+    \end{column}
+    \begin{column}{.49\textwidth}
+      Gerald Sussman
+      \includegraphics[scale=.80]{gerald-sussman}
+    \end{column}
+  \end{columns}
 }
 
 \begin{frame}
-\frametitle{Code Samples} 
+  \frametitle{Code Samples} 
+  \lstinputlisting[language=clojure]{src/factory.clj} 
+
 \end{frame}  
 
 \end{document}

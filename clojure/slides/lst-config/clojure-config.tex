@@ -1,3 +1,9 @@
+%
+% listings does not currently support clojure...here's an attempt I
+% found in a discussion thread to add clojure support.
+% For the moment, this results in decent looking code. I might switch
+% to minted in the future.
+%
 \lstdefinelanguage{clojure}%
 {morekeywords={*,*1,*2,*3,*agent*,*allow-unresolved-vars*,*assert*,*clojure-version*,*command-line-args*,%
 *compile-files*,*compile-path*,*e,*err*,*file*,*flush-on-newline*,*in*,*macro-meta*,%
@@ -56,11 +62,12 @@ with-meta,with-open,with-out-str,with-precision,xml-seq,zero?,zipmap
    morestring=[b]"%
   }[keywords,comments,strings]%
 
-\lstset{frame=tb,
+\lstset{
+%  frame=tb,
   language=clojure,
 % showstringspaces=false,
 %  keepspaces=true
-  columns=fullflexible,
+%  columns=fullflexible,
 %  basicstyle={\LSTfont},
   numbers=none,
   numberstyle=\tiny\color{gray},

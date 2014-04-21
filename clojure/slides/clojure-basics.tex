@@ -18,6 +18,10 @@
 \hypersetup{colorlinks=color, linkcolor=black}
 \definecolor{OliveGreen}{rgb}{0,0.6,0}
 \graphicspath{{./images/}}
+%
+% Turn off beamer nav stuff...
+%
+\setbeamertemplate{navigation symbols}{}
 
 \input{lst-config/clojure-config}
 \begin{document}
@@ -48,6 +52,18 @@
 }
 
 \frame{
+  \frametitle{Notable Attributes of the Original Lisp}
+  \begin{itemize}
+    \item Conditionals
+    \item A function type
+    \item Recursion
+    \item Variables as pointers
+    \item Garbage Collection
+  \end{itemize}
+}
+
+
+\frame{
   \frametitle{Scheme 1975-1980}
   \begin{columns}
     \begin{column}{.49\textwidth}
@@ -60,6 +76,98 @@
     \end{column}
   \end{columns}
 }
+
+\frame{
+  \frametitle{Racket - Mid 1990s}
+}
+
+\frame{
+  \frametitle{Clojure 2007}
+  \center{
+    \includegraphics[scale=.80]{rich-hickey}
+  }
+  Rich Hickey
+}
+
+\frame{
+  \frametitle{Clojure Distinguishing Characteristics}
+  \begin{itemize}
+    \item Immutability is the Default 
+    \pause
+    \item Unified Sequences 
+    \pause
+    \item Concurrency Support 
+    \pause
+    \item Embraces Java 
+    \pause
+  \end{itemize}
+}
+
+\begin{frame}
+  \frametitle{Clojure Syntax}
+  \begin{tabularx}{\textwidth}{ |X|X| }
+  \hline
+  Form & (fn-name fn-arg...)  \\
+  \hline
+  Vector & []  \\
+  \hline
+  Map(hash) &    \{\}  \\
+  \hline
+  Set &    \#\{\} \\
+  \hline
+  Keyword(symbol) & :some-keyword  \\
+  \hline
+  \end{tabularx}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Functions}
+  \itemize{
+    \item show func with optional declarations
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Control Flow Primitives}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sequences}
+  \itemize {
+  \item Referred to as Seqs (pronouced seeks)
+  \item Unified interface for maps, lists, trees, and arrays  
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{vars and refs}
+\end{frame}
+
+\begin{frame}
+  \frametitle{namespaces}
+  \itemize{
+  \item clojure.lang.Namespace
+  \item current accessible via nsy
+  }  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Naming Conventions}
+  \itemize{
+  \item ear muffs
+  }  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Java Interop}
+  
+  \itemize{
+    \item javadoc
+    \item memfn
+    \item dot special form
+    \item bean
+  }
+\end{frame}
 
 \begin{frame}
   \frametitle{Code Samples} 

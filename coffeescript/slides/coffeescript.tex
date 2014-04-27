@@ -1,3 +1,23 @@
+%
+% - Presentation Plan -
+% * History
+% * Maybe - mention several of the JS warts CS works around
+% * Basic Operators
+% * Namespaces?
+% * Object literal sugar
+% * Destructuring
+% * String interp.
+% * Classes            - Might show this live with js to coffee
+% * Fat arrow
+% * Method default args
+% * Testing options - Show github mocha + chai?
+% * Show merchinator code using JS libs
+% * Show debugging merchinator code in chrome
+% * Pick existing JS code and show CS version (Dashboards repo is
+%   probably a good source)
+%
+% Compile with 'pdflatex -shell-escape coffeescript.tex'
+%
 \documentclass{beamer}
 
 \usetheme{Warsaw}    
@@ -9,6 +29,7 @@
 \usepackage{microtype}
 \usepackage[T1]{fontenc}
 \usepackage[scaled]{beramono}
+\usepackage{minted}
 
 \usepackage{xcolor}
 
@@ -45,10 +66,9 @@
       \pause
     \item Concise
       \pause
-    \item Remove typical Javascript boilerplate (semicolons, braces,
-      function keyword)
+    \item Remove typical Javascript boilerplate (function keyword)
       \pause
-    \item  typically 1/3 fewer lines, with no effect on runtime performance
+    \item  Typically 1/3 fewer lines, with no effect on runtime performance
   \end{itemize}
 \end{frame}
 
@@ -57,13 +77,47 @@
   \begin{itemize}
     \item December 2009 - Jeremy Ashkenas made first Git commit
     \pause
-    \item Inspired by many languages including Ruby, Python, Perl, and Haskell
+    \item Inspired by many languages including Ruby, Python, and Haskell
       \pause
     \item First version written in Ruby
       \pause
-    \item February 2010 - Ruby version replaced by self-hosting implementationx
+    \item February 2010 - Ruby version replaced by self-hosting implementation
   \end{itemize}  
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{String Interpolation}
+  CS Version
+  \begin{minted}[linenos=false,fontsize=\small]{coffeescript}
+    "[id^=edit_#{subject}_],[id^=new_#{subject}]"
+  \end{minted}
+  JS Version
+  \begin{minted}[linenos=false,fontsize=\small]{javascript}
+    "[id^=edit_" + subject + "_],[id^=new_" + subject + "]";
+  \end{minted}
+  
+\end{frame}
 
+
+\begin{frame}
+  \frametitle{Useful Operators}
+  \begin{itemize}
+    \item ?= is the existential operator. It checks against null and undefined
+    \item ||= checks the variable's value to be "not false"
+   \end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\begin{minted}[linenos=false,
+  fontsize=\tiny]{coffeescript}
+#
+# Don't allow duplicates between primary and recommended skus...
+#
+skuFilter = (parsedResponse) ->
+  _.intersection(
+    duplicateSkuFilter(parsedResponse, '.sku-list-cell'),
+    duplicateSkuFilter(parsedResponse, '.recommended-sku-list-cell'))
+\end{minted}
+\end{frame}
 \end{document}

@@ -102,26 +102,28 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Heredoc}
-  \inputminted{coffeescript}{src/heredoc.coffee}
-\end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Function Definitions}
 
   \begin{minted}[lineos=false,fontsize=\normalsize]{coffeescript}
-    
+    inc = (a) ->
+      a + 1
   \end{minted}
 
   Compiles to:
 
   \begin{minted}[lineos=false,fontsize=\normalsize]{javascript}
-    if (typeof variable !== "undefined" && 
-        variable !== null) {
-      console.log('variable is declared and not null');
-    }
+    var dec, inc;
+
+    inc = function(a) {
+      return a + 1;
+    };    
   \end{minted}  
+\end{frame}
+
+\begin{frame}
+\frametitle{Flow Control}
 \end{frame}
 
 
@@ -221,7 +223,6 @@
  \begin{frame}[fragile]
   \frametitle{Existential Operator}
 
-
   Conditional function invocation:
 
   \begin{minted}[lineos=false,fontsize=\normalsize]{coffeescript}
@@ -237,6 +238,10 @@
   \end{minted}  
 \end{frame}
 
+\begin{frame}
+  \frametitle{Heredoc}
+  \inputminted{coffeescript}{src/heredoc.coffee}
+\end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Embedding Raw JavaScirpt}

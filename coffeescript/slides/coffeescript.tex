@@ -108,6 +108,24 @@
 \end{frame}
 
 \begin{frame}[fragile]
+  \frametitle{Function Definitions}
+
+  \begin{minted}[lineos=false,fontsize=\normalsize]{coffeescript}
+    
+  \end{minted}
+
+  Compiles to:
+
+  \begin{minted}[lineos=false,fontsize=\normalsize]{javascript}
+    if (typeof variable !== "undefined" && 
+        variable !== null) {
+      console.log('variable is declared and not null');
+    }
+  \end{minted}  
+\end{frame}
+
+
+\begin{frame}[fragile]
   \frametitle{String Interpolation}
   CS Version
   \begin{minted}[linenos=false,fontsize=\small]{coffeescript}
@@ -129,12 +147,104 @@
 
 \end{frame}
 
-\begin{frame}
-  \frametitle{Useful Operators}
-  \begin{itemize}
-    \item ?= is the existential operator. It checks against null and undefined
-    \item ||= checks the variable's value to be "not false"
-   \end{itemize}
+%
+% ---- Testing for Existence ----
+%
+ \begin{frame}[fragile]
+  \frametitle{Existential Operator}
+
+
+  Testing for existence:
+
+  \begin{minted}[lineos=false,fontsize=\normalsize]{coffeescript}
+    if variable?
+      console.log('variable is declared and not null')
+  \end{minted}
+
+
+  Compiles to:
+
+  \begin{minted}[lineos=false,fontsize=\normalsize]{javascript}
+    if (typeof variable !== "undefined" && 
+        variable !== null) {
+      console.log('variable is declared and not null');
+    }
+  \end{minted}  
+\end{frame}
+
+%
+% ----- Conditional Assigment -------
+%
+ \begin{frame}[fragile]
+  \frametitle{Existential Operator}
+
+
+  Conditional Assignment:
+
+  \begin{minted}[lineos=false,fontsize=\normalsize]{coffeescript}
+    getUserProfile = ->
+      @profile ?= DB.getProfile(User.current)
+  \end{minted}
+
+
+  Compiles to:
+
+  \begin{minted}[lineos=false,fontsize=\normalsize]{javascript}
+    getUserProfile = function() {
+      return this.profile != null ? this.profile : 
+        this.profile = DB.getProfile(User.current);
+    };
+  \end{minted}  
+\end{frame}
+
+ \begin{frame}[fragile]
+  \frametitle{Existential Operator}
+
+
+  Field Chaining:
+
+  \begin{minted}[lineos=false,fontsize=\normalsize]{coffeescript}
+    zip = User.current?.address?.zip
+  \end{minted}
+
+  Compiles to:
+
+  \begin{minted}[lineos=false,fontsize=\normalsize]{javascript}
+    var zip, _ref, _ref1;
+
+    zip = (_ref = User.current) != null ? 
+      (_ref1 = _ref.address) != null ? _ref1.zip : 
+      void 0 : void 0;
+  \end{minted}  
+\end{frame}
+
+ \begin{frame}[fragile]
+  \frametitle{Existential Operator}
+
+
+  Conditional function invocation:
+
+  \begin{minted}[lineos=false,fontsize=\normalsize]{coffeescript}
+    someFunction?()
+  \end{minted}
+
+  Compiles to:
+
+  \begin{minted}[lineos=false,fontsize=\normalsize]{javascript}
+    if (typeof someFunction === "function") {
+      someFunction();
+    }
+  \end{minted}  
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Embedding Raw JavaScirpt}
+  \begin{minted}[lineos=false,fontsize=\Large]{coffeescript}
+    rawJS = `function() {
+      return someSuperComplexThing;
+    }`
+  \end{minted}
 \end{frame}
 
 

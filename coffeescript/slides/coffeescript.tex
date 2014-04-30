@@ -30,6 +30,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[scaled]{beramono}
 \usepackage{minted}
+\usepackage{multicol}
 
 \usepackage{xcolor}
 
@@ -98,7 +99,8 @@
     \item Splats
     \item Object literals
     \item Fat arrow
-    \item prototype and this alias
+    \item Prototype and this alias
+    \item Classes
   \end{itemize}
 \end{frame}
 
@@ -112,7 +114,6 @@
   \end{minted}
 
   Compiles to:
-
   \begin{minted}[lineos=false,fontsize=\normalsize]{javascript}
     var dec, inc;
 
@@ -131,11 +132,11 @@
   \frametitle{String Interpolation}
   CS Version
   \begin{minted}[linenos=false,fontsize=\small]{coffeescript}
-    "[id^=edit_#{subject}_],[id^=new_#{subject}]"
+    "[id^=edit_#{subject}],[id^=new_#{subject}]"
   \end{minted}
   JS Version
   \begin{minted}[linenos=false,fontsize=\small]{javascript}
-    "[id^=edit_" + subject + "_],[id^=new_" + subject + "]";
+    "[id^=edit_" + subject + "],[id^=new_" + subject + "]";
   \end{minted}  
 \end{frame}
 
@@ -247,22 +248,30 @@
   \frametitle{Embedding Raw JavaScirpt}
   \begin{minted}[lineos=false,fontsize=\Large]{coffeescript}
     rawJS = `function() {
-      return someSuperComplexThing;
+      return someComplexThing;
     }`
   \end{minted}
 \end{frame}
 
 
-\begin{frame}[fragile]
-\begin{minted}[linenos=false,
-  fontsize=\tiny]{coffeescript}
-#
-# Don't allow duplicates between primary and recommended skus...
-#
-skuFilter = (parsedResponse) ->
-  _.intersection(
-    duplicateSkuFilter(parsedResponse, '.sku-list-cell'),
-    duplicateSkuFilter(parsedResponse, '.recommended-sku-list-cell'))
-\end{minted}
+\begin{frame}
+  \frametitle{Tooling}
+    \includegraphics[scale=.40]{tooling}
+  \begin{multicols}{2}
+  \begin{itemize}
+    \item Intellij/Rubymine
+    \item Emacs
+    \item Vim
+    \item Sublime
+    \item node
+    \item CoffeLint
+    \item Rails
+    \item \href{http://www.playframework.com/documentation/2.0/AssetsCoffeeScript}{Play}
+    \item Eclipse
+    \item \href{https://jawr.java.net/}{Jawr}
+
+  \end{itemize}
+\end{multicols}
 \end{frame}
+
 \end{document}

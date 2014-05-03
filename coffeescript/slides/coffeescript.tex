@@ -20,10 +20,14 @@
 %
 \documentclass{beamer}
 
-\usetheme{Warsaw}    
+
+%\usetheme{PaloAlto}
+\usetheme{Madrid}
+\definecolor{links}{HTML}{2A1B81}
+\hypersetup{colorlinks,linkcolor=,urlcolor=links}
+%\usetheme{Warsaw}    
 
 \usepackage{listings}                                   
-\usepackage{hyperref}
 \usepackage{graphicx}                                 
 \usepackage{tabularx}
 \usepackage{microtype}
@@ -31,8 +35,6 @@
 \usepackage[scaled]{beramono}
 \usepackage{minted}
 \usepackage{multicol}
-
-\usepackage{xcolor}
 
 \newcommand\Small{\fontsize{5}{5.2}\selectfont}
 \newcommand*\LSTfont{\Small\ttfamily\SetTracking{encoding=*}{-60}\lsstyle}
@@ -117,10 +119,11 @@
     \item Default arguments
     \item Existential operator
     \item Splats
-    \item Object literals
     \item Fat arrow
     \item Prototype and this alias
     \item Classes
+    \item Ranges
+    \item List comprehensions
   \end{itemize}
 \end{frame}
 
@@ -279,7 +282,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Heredoc with interpolation}
+  \frametitle{Heredoc with Interpolation}
   \inputminted{coffeescript}{src/heredoc_interp.coffee}
 \end{frame}
 
@@ -315,5 +318,18 @@
   \end{itemize}
 \end{multicols}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Resources}
+  \begin{itemize}
+    \item \href{http://arcturo.github.io/library/coffeescript/}{The
+        Little Book on CoffeeScript}
+    \item \href{http://www.coffeescriptcookbook.com}{CoffeeScript Cookbook}
+    \item \href{http://aseemk.com/talks/intro-to-coffeescript}{You
+        Don\'t Know Beans About Coffeescript}
+    \item \href{http://js2coffee.org/}{JS 2 Coffee}
+  \end{itemize}
+\end{frame}
+
 
 \end{document}

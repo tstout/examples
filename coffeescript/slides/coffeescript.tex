@@ -56,7 +56,7 @@
     \includegraphics[scale=.60]{cs-logo}
   }
 
-  April 2014
+%  April 2014
 
 \end{frame}
 
@@ -75,8 +75,6 @@
   \end{itemize}  
 \end{frame}
 
-
-
 \begin{frame}
   \frametitle{Why CoffeeScript?}
   \begin{itemize}
@@ -85,7 +83,7 @@
       \pause
     \item Syntax
     \pause
-    \item ES6 Now!
+    \item ES6 Now! 
   \end{itemize}
 \end{frame}
 
@@ -113,18 +111,20 @@
 %
 % TODO - consider using columns for better appearance
 %
+  \begin{multicols}{2}
   \begin{itemize}
     \item Multi-line strings (heredoc)
     \item String interpolation
     \item Default arguments
     \item Existential operator
-    \item Splats
+    \item Splats (varargs)
     \item Fat arrow
     \item Prototype and this alias
     \item Classes
     \item Ranges
     \item List comprehensions
   \end{itemize}
+  \end{multicols}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -167,12 +167,31 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Default Arguments}
+  \frametitle{Variable Arguments}
+
+  \inputminted{coffeescript}{src/vararg.coffee}
+
+  \pause
+  \vspace{.5cm}
+  Compiles to:
+  \vspace{.5cm}
+
+  \inputminted[fontsize=\tiny]{coffeescript}{src/vararg.js}
   
 \end{frame}
 
 \begin{frame}
-\frametitle{Variable Arguments}
+\frametitle{Default  Arguments}
+
+  \inputminted{coffeescript}{src/defvalues.coffee}
+
+  \pause
+  \vspace{.5cm}
+  Compiles to:
+  \vspace{.5cm}
+
+  \inputminted[fontsize=\small]{coffeescript}{src/defvalues.js}
+
 
 \end{frame}
 
@@ -181,7 +200,6 @@
 %
  \begin{frame}[fragile]
   \frametitle{Existential Operator}
-
 
   Testing for existence:
 
@@ -314,6 +332,10 @@
     \item
       \href{http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/}{Source
       Maps}
+    \item \href{https://github.com/talios/coffee-maven-plugin}{maven}
+    \item 
+      \href{https://chrome.google.com/webstore/detail/coffeereplconsole/eoifmnkmfmjellmlicakeocfjmhdjgfl}{Chrome
+        REPL}
 
   \end{itemize}
 \end{multicols}
@@ -328,6 +350,8 @@
     \item \href{http://aseemk.com/talks/intro-to-coffeescript}{You
         Don\'t Know Beans About Coffeescript}
     \item \href{http://js2coffee.org/}{JS 2 Coffee}
+    \item
+      \href{http://autotelicum.github.io/Smooth-CoffeeScript/}{Smooth CoffeeScript}
   \end{itemize}
 \end{frame}
 

@@ -3,6 +3,6 @@ carlSaganQuote = '''
  to grapple with. It may be counterintuitive. It may
  contradict deeply held prejudices. It may not be
  consonant with what we desperately want to be true.
- But our preferences do not determine what's true        
+ But our preferences do not determine what's true. 
 '''
 

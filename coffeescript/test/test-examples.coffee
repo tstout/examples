@@ -52,8 +52,7 @@ exports.group =
 
       divide: (x, y) ->
         x / y
-
-                 
+                
     calc = new Calculator()
     test.equal(calc.add(1, 1), 2)
     test.equal(calc.subtract(1, 1), 0)
@@ -61,7 +60,15 @@ exports.group =
     test.equal(calc.divide(144, 12), 12)
     test.done()
 
+  userPrefClass: (test) ->
+
+    class Prefs
+      constructor: (@user, @id, @prefs) ->
+
       
+      
+
+               
     
 
 

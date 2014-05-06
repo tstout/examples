@@ -121,6 +121,7 @@
     \item Fat arrow
     \item Prototype and this alias
     \item Classes
+    \item IIFE
     \item Ranges
     \item List comprehensions
   \end{itemize}
@@ -131,8 +132,8 @@
   \frametitle{Function Definitions}
 
   \begin{minted}[lineos=false,fontsize=\normalsize]{coffeescript}
-    inc = (a) ->
-      a + 1
+    inc = (val) ->
+      val + 1
   \end{minted}
 
   \pause
@@ -149,22 +150,6 @@
   \end{minted}  
 \end{frame}
 
-\begin{frame}[fragile]
-  \frametitle{String Interpolation}
- 
-  \begin{minted}[linenos=false,fontsize=\normalsize]{coffeescript}
-    "#{name} is #{age} years old."
-  \end{minted}
-
-  \pause
-  \vspace{.5cm}
-  Compiles to:
-  \vspace{.5cm}
-
-  \begin{minted}[linenos=false,fontsize=\normalsize]{javascript}
-    "" + name + " is " + age + " years old."
-  \end{minted}  
-\end{frame}
 
 \begin{frame}
   \frametitle{Variable Arguments}
@@ -193,6 +178,23 @@
   \inputminted[fontsize=\small]{coffeescript}{src/defvalues.js}
 
 
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{String Interpolation}
+ 
+  \begin{minted}[linenos=false,fontsize=\normalsize]{coffeescript}
+    "#{name} is #{age} years old."
+  \end{minted}
+
+  \pause
+  \vspace{.5cm}
+  Compiles to:
+  \vspace{.5cm}
+
+  \begin{minted}[linenos=false,fontsize=\normalsize]{javascript}
+    "" + name + " is " + age + " years old."
+  \end{minted}  
 \end{frame}
 
 %
@@ -245,7 +247,7 @@
     getUserProfile = function() {
       return this.profile != null ? this.profile : 
         this.profile = DB.getProfile(User.current);
-    };
+    }x;
   \end{minted}  
 \end{frame}
 

@@ -60,13 +60,44 @@ exports.group =
     test.equal(calc.divide(144, 12), 12)
     test.done()
 
-  userPrefClass: (test) ->
+  skuClassWithNamedArgs: (test) ->
 
-    class Prefs
-      constructor: (@user, @id, @prefs) ->
+    class Sku
+      constructor: ({name, id, dept, price}) ->
+        @name = name
+        @id = id
+        @dept = dept
+        @price = price
 
+      toString: ->
+        "#{@name}:#{@dept}:#{id}"
+
+      cost: (quantity) ->
+        quantity * @price  
       
-      
+
+    s = new Sku(name: 'double dish', id: 1, dept: 'kitchen', price: 19.99)
+    test.equal(s.cost(2), 19.99 * 2)
+     
+    test.done()
+
+  skuClass: (test) ->
+    class Sku
+      constructor: (@name, @id, @dept, @price) ->
+
+      toString: ->
+        "#{@name}:#{@dept}:#{@id}"
+
+      cost: (quantity) ->
+        quantity * @price  
+
+    s = new Sku('double dish', 1, 'kitchen', 19.99)
+    test.equal(s.toString(), 'double dish:kitchen:1')
+    test.equal(s.cost(2), 19.99 * 2)
+    
+    test.done()   
+
+
 
                
     

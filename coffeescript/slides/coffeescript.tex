@@ -13,8 +13,7 @@
 % * Testing options - Show github mocha + chai?
 % * Show merchinator code using JS libs
 % * Show debugging merchinator code in chrome
-% * Pick existing JS code and show CS version (Dashboards repo is
-%   probably a good source)
+% * Pick existing JS code and show CS version (Dashboards repo?)
 %
 % Compile with 'pdflatex -shell-escape coffeescript.tex'
 %
@@ -80,10 +79,14 @@
   \begin{itemize}
     \pause
     \item A language that takes out the frustrating and overly verbose bits of JS, and provides a safer, briefer way to stick to the good parts.
-      \pause
+    \pause
     \item Syntax
     \pause
-    \item ES6 Now! 
+    \item Robust
+    \pause
+    \item ES6 Now!
+    \pause
+    \item Improve your JavaScript skills
   \end{itemize}
 \end{frame}
 
@@ -98,7 +101,7 @@
     \item Compilation
     \pause
     \item Debugging
-      \pause
+    \pause
   \end{itemize}
 \end{frame}
 
@@ -176,7 +179,6 @@
   \vspace{.5cm}
 
   \inputminted[fontsize=\small]{coffeescript}{src/defvalues.js}
-
 
 \end{frame}
 
@@ -306,6 +308,39 @@
   JavaScript class
   \vspace{.5cm}
   \inputminted[lineos=true,fontsize=\tiny]{javascript}{src/sku-class.js}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Fat Arrow}
+  \inputminted[lineos=false,fontsize=\normalsize]{coffeescript}{src/fat.coffee}
+  \pause
+  \vspace{.5cm}
+  \inputminted[lineos=false,fontsize=\small]{javascript}{src/fat.js}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{do (IIFE)}
+  \begin{minted}[lineos=false,fontsize=\normalsize]{coffeescript}
+    counter = do ->
+      x = 0
+      ->
+        x++
+  \end{minted}
+  \pause
+  \vspace{.5cm}
+  Compiles to:
+  \vspace{.5cm}
+  \begin{minted}[lineos=false,fontsize=\normalsize]{javascript}
+    var counter;
+
+    counter = (function() {
+      var x;
+      x = 0;
+      return function() {
+        return x++;
+      };
+    })();
+  \end{minted}
 \end{frame}
 
 \begin{frame}

@@ -97,7 +97,18 @@ exports.group =
     
     test.done()   
 
+  doTest: (test) ->
+    counter = do ->
+      x = 0
+      ->
+        x++
 
+    test.equal(counter(), 0)
+    test.equal(counter(), 1)
+    test.equal(counter(), 2)
+    test.equal(counter(), 3)
+    
+    test.done()
 
                
     

@@ -1,6 +1,10 @@
+% 
+% Compile with 'pdflatex -shell-escape clojure-basics.tex'
+%
+
 \documentclass{beamer}
 
-\usetheme{Warsaw}    
+\usetheme{Madrid}    
 
 \usepackage{listings}                                   
 \usepackage{hyperref}
@@ -9,11 +13,12 @@
 \usepackage{microtype}
 \usepackage[T1]{fontenc}
 \usepackage[scaled]{beramono}
-
+\usepackage{minted}
 \usepackage{xcolor}
 
 \newcommand\Small{\fontsize{5}{5.2}\selectfont}
 \newcommand*\LSTfont{\Small\ttfamily\SetTracking{encoding=*}{-60}\lsstyle}
+\renewcommand{\footnotesize}{\tiny}
 
 \hypersetup{colorlinks=color, linkcolor=black}
 \definecolor{OliveGreen}{rgb}{0,0.6,0}
@@ -26,33 +31,75 @@
 \input{lst-config/clojure-config}
 \begin{document}
 
-
 \begin{frame}
-  \frametitle{Clojure Intro}
+  \frametitle{Clojure}
   \center{
     \includegraphics[scale=.40]{Clojure-Logo}
   }
 
-  June 2014
 
+% Look at wikimedia commons for fair use pictures
+
+%  June 2014
+% TODO - Mention Phil Bagwell's persistent data structures.
+% Multimethods - https://pragprog.com/magazines/2011-07/growing-a-dsl-with-clojure
 \end{frame}
 
 \frame{
-  \frametitle{A Brief History of Lisp}
+  \frametitle{Origins of Lisp - Church}
   \begin{columns}
     \begin{column}{.49\textwidth}
-      \includegraphics[scale=.60]{john-mccarthy}
+      \includegraphics[scale=.50]{church}
     \end{column}
     \begin{column}{.49\textwidth}
       \itemize{
-      \item John McCarthy 1958
+        \item Alonzo Church - 1930s
+        \item $\lambda$ Calculus
       }
     \end{column}
   \end{columns}
 }
 
 \frame{
-  \frametitle{Notable Attributes of the Original LISP}
+  \frametitle{Origins of Lisp - McCarthy}
+  \begin{columns}
+    \begin{column}{.49\textwidth}
+      \includegraphics[scale=.80]{john-mccarthy}
+    \end{column}
+    \begin{column}{.49\textwidth}
+      \itemize{
+      \item John McCarthy - 1958
+      \item
+        OriginalPaper - 1960
+        \footnote{\href{http://www-formal.stanford.edu/jmc/recursive.html}{Original Paper}}
+      \item 
+        Influenced by Church \& IPL 
+        \footnote{\href{https://en.wikipedia.org/wiki/Information_Processing_Language}{
+            IPL Overview}}
+        \vspace {4 cm}
+      }
+    \end{column}
+  \end{columns}
+}
+
+\frame{
+  \frametitle{Origins of Lisp - Russell}
+  \begin {columns}
+    \begin{column}{.49\textwidth}
+      \includegraphics[scale=1.25]{steve-russell}
+      \vspace {.25 cm}
+      Steve Russell - First Lisp interpreter
+    \end{column}
+    \begin{column}{.49\textwidth}
+      \includegraphics[scale=1.35]{ibm-704}
+      \vspace {.125 cm}
+      IBM-704
+      \end{column}
+   \end{columns}
+}
+
+\frame{
+  \frametitle{Notable Attributes of the Original Lisp}
   \begin{itemize}
     \item Conditionals
     \item A function type
@@ -62,52 +109,101 @@
   \end{itemize}
 }
 
-
 \frame{
-  \frametitle{Scheme 1975-1980}
-  \begin{columns}
-    \begin{column}{.49\textwidth}
-      Guy Steele
-      \includegraphics[scale=.25]{guy-steele}
-    \end{column}
-    \begin{column}{.49\textwidth}
-      Gerald Sussman
-      \includegraphics[scale=.80]{gerald-sussman}
-    \end{column}
-  \end{columns}
+  \frametitle{Many Lisp Implementations}
+%
+% TODO add more...
+%
+  \begin{itemize}
+  \item Maclisp - Late 1960s \footnote{Not created by Apple}
+  \item Scheme - 1975 (Guile, Racket, Chicken) 
+  \item Common LISP - 1984
+  \item Emacs LISP - 1985
+  \end{itemize}
 }
 
-\frame{
-  \frametitle{Racket - Mid 1990s}
-}
+
+% \frame{
+%   \frametitle{Scheme 1975-1980}
+%   \begin{columns}
+%     \begin{column}{.49\textwidth}
+%       Guy Steele
+%       \includegraphics[scale=.25]{guy-steele}
+%     \end{column}
+%     \begin{column}{.49\textwidth}
+%       Gerald Sussman
+%       \includegraphics[scale=.80]{gerald-sussman}
+%     \end{column}
+%   \end{columns}
+% }
+
+% \frame{
+%   \frametitle{Common LISP}
+%   Dates????? - major contributors ...
+% }
 
 \frame{
   \frametitle{Clojure 2007}
   \center{
-    \includegraphics[scale=.80]{rich-hickey}
+    \includegraphics[scale=.45]{rhickey}
   }
   Rich Hickey
 }
 
 \frame{
-  \frametitle{Clojure Distinguishing Characteristics}
+  \frametitle{Yet Another LISP?}
   \begin{itemize}
+    %\pause
     \item Immutability is the Default 
-    \pause
-    \item Unified Sequences 
-    \pause
-    \item Concurrency Support 
-    \pause
-    \item Embraces Java 
-    \pause
+    %\pause
+    \item Persistent Collections
+    %\pause
+    \item Unified Sequences (Lists, Maps, Vectors, Sets)
+    %\pause
+    \item Concurrency Support
+    %\pause
+    \item Designed to rely on (and embrace) a host platform
+    %\pause
+    \item JVM
+    %\pause
+    \item Javascipt (V8/Node)
+    %\pause
+    \item CLR/IOS/Android
+    %pause
+    \item Convenient data literal syntax
+
+% 
+% Mention clojurescript has laid the ground-work of clojure-in-clojure
+%
+    % \item Embraces the host platform (Predominantly the JVM)
+    % \pause
+    % \item Clojurescript brings Clojure to the browser/node environment
+    % \pause
   \end{itemize}
 }
 
+\frame{
+  \frametitle{Clojure's Worldview}
+  \begin{itemize}
+    \item Object Oriented Programming Is Overrated
+    \item Mutable State Makes Concurrency Hard
+    \item Data is Simple - Hiding it behind objects creates problems.
+      It is no longer simple.
+  \end{itemize}
+}
+
+% -- Nice Quote from Joy of Clojure --
+% Some programming languages have been created primarily to demonstrate
+% a particular nugget of academia or to explore certain theories of
+% computation. Clojure is not one of these. Rich Hickey has said on
+% numerous occasions that Clojure has value to the degree that it lets
+% you build interesting and useful applications.
+
 \begin{frame}
-  \frametitle{Clojure Syntax}
+  \frametitle{Core Clojure Syntax}
   \begin{tabularx}{\textwidth}{ |X|X|X| }
     \hline
-    \emph{Form} & (fn-name fn-arg...)  &  (+ 1 2 3) \\ 
+    \emph{function invocation} & (fn-name fn-arg...)  &  (foo 1 2 3) \\ 
     \hline
     \emph{Keyword} & :some-keyword  & :foo \\ 
     \hline
@@ -117,18 +213,73 @@
     \hline
     \emph{Vector} & []  & [1 2 3] \\
     \hline
+    \emph{List} & '() & '(1 2 3) \\
+    \hline
+%    \emph{Regex} & \#"" & \#"*.clj" \\    
+%    \hline
   \end{tabularx}
+
+  \vspace{.5cm}
+  Everything is simply (func-name arg1 arg2 ...) where arguments can
+  be other functions or data structures. 
 \end{frame}
 
 \begin{frame}
+\frametitle{Limited Syntax Budget}
+\begin{itemize}
+  \item Data Literals 
+  \item Reader Macros
+  \item Destructuring
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Syntax Sugar (Reader Macros)}
+%
+% put table here...
+%
+\end{frame}
+
+\begin{frame}[fragile]
   \frametitle{Functions}
-  \itemize{
-    \item show func with optional declarations
-  }
+  Typical function definition:
+  \begin{minted}[linenos=false,fontsize=\normalsize]{clojure}
+    (defn foo "optional doc comment" [a b]
+     (...implementation...))
+  \end{minted}
+  \vspace{1 cm}
+
+  This is an anonymous function (sum of its args):
+  \begin{minted}[lineos=false,fontsize=\normalsize]{clojure}
+  (fn [a b] (+ a b))   
+  \end{minted}
+  \vspace{1 cm}
+
+  An abbreviated equivalent:
+  \begin{minted}[lineos=false,fontsize=\normalsize]{clojure}
+  #(+ %1 %2)
+  \end{minted}
 \end{frame}
 
 \begin{frame}
+  \frametitle{Multiple-arity Functions (Overloading)}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Function Pre/Post Conditions}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Multimethods}
+\end{frame}
+
+\begin{frame}[fragile]
   \frametitle{Control Flow Primitives}
+  \begin{minted}[linenos=false,fontsize=\normalsize]{clojure}
+    (+ 1 2 3 4)
+    #"some regex"
+
+  \end{minted}
 \end{frame}
 
 \begin{frame}
@@ -137,6 +288,15 @@
   \item Referred to as Seqs (pronouced seeks)
   \item Unified interface for maps, lists, trees, and arrays  
   }
+\end{frame}
+
+\begin{frame}
+  \frametitle{Map Binding Forms}
+% Look here from some inspiration http://stuartsierra.com/2010/01/15/keyword-arguments-in-clojure
+\end{frame}
+
+\begin{frame}
+  \frametitle{Lazy-Seq TODO}
 \end{frame}
 
 \begin{frame}
@@ -152,17 +312,10 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Naming Conventions}
-  \itemize{
-  \item ear muffs
-  }  
-\end{frame}
-
-\begin{frame}
   \frametitle{Java Interop}
   
   \itemize{
-    \item javadoc
+    \item javadoc (open javadoc while in repl?)
     \item memfn
     \item dot special form
     \item bean
@@ -170,9 +323,34 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Code Samples} 
-  \lstinputlisting[language=clojure]{src/factory.clj} 
+  \frametitle{Metadata}
 
+\end{frame}
+
+\begin{frame}
+  \frametitle{REPL}
+%
+% Useful repl stuff here...inspect-tree inspect-table javadoc doc source
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Code Samples} 
+  \inputminted{clojure}{src/xml-parse.clj}
 \end{frame}  
 
+\begin{frame}
+  \frametitle{Resources}
+% Cheat sheets - destructuring and main one from clojure.org
+\end{frame}
+
+% 
+% Let over lambda example...can simplify with #()
+%
+% (defn db-layer [db-connection]
+%   (let [db-operations {:save (fn [obj] (save db-connection obj))
+%                        :delete (fn [obj] (delete db-connection obj))
+%                        :query (fn [query] (query db-connection query))}]
+%     (fn [operation & params]
+%       (-> (db-operations operation) (apply params)))))
 \end{document}

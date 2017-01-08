@@ -48,7 +48,7 @@
 \frame{
   \frametitle{Origins of Clojure - Church}
   \begin{columns}
-    \begin{column}{.49\textwidth}
+    \begin{column}{.60\textwidth}
       \includegraphics[scale=.50]{church}
     \end{column}
     \begin{column}{.49\textwidth}
@@ -66,9 +66,10 @@
   \frametitle{Origins of Clojure - McCarthy}
   \begin{columns}
     \begin{column}{.49\textwidth}
-      \includegraphics[scale=.80]{john-mccarthy}
+      \includegraphics[scale=1]{john-mccarthy}
     \end{column}
     \begin{column}{.49\textwidth}
+      \vspace {4 cm}
       \itemize{
       \item John McCarthy - 1958
       \item
@@ -89,7 +90,6 @@
   \begin {columns}
     \begin{column}{.49\textwidth}
       \includegraphics[scale=1.25]{steve-russell}
-      \vspace {.25 cm}
       Steve Russell - First Lisp interpreter
     \end{column}
     \begin{column}{.49\textwidth}
@@ -146,8 +146,56 @@
 % }
 
 \frame{
-\frametitle{Origins of Clojure - Bagwell 1972}
+  \frametitle{Persistent Data Structures - 1986}
+  \begin {columns}
+    \begin{column}{.49\textwidth}
+      \begin{itemize}
+      \item James R. Drisco
+      \item Neil Sarna
+      \item Daniel D. Sleat
+      \item Robert E. Tawa
+      \end{itemize}
+    \end{column}
+    \begin{column}{.49\textwidth}
+      \begin{itemize}
+        
+      \item \href{http://www.cs.cmu.edu/~sleator/papers/another-persistence.pdf}{\color{blue}{
+        Making Data Structures Persistent}}
+      \item Logarithmic access, insertion, and deletion times
+      \item $O$(1)
+
+      \item 
+      \end{itemize}
+    \end{column}
+  \end{columns}
 }
+
+
+\frame{
+  \frametitle{Origins of Clojure - Bagwell 2001}
+  \begin {columns}
+    \begin{column}{.49\textwidth}
+    \includegraphics[scale=1]{phil-bagwell}
+      \vspace {.25 cm}
+   \end{column}
+   \begin{column}{.49\textwidth}
+     \begin{itemize}
+      \item \href
+      {https://infoscience.epfl.ch/record/64398/files/idealhashtrees.pdf}{\color{blue}{
+      Ideal Hash Trees}}
+      \item Hash Array Mapped Trie
+      \end{itemize}
+
+   \end{column}
+   \end{columns}
+  Phil Bagwell
+}
+
+\frame{
+  \frametitle{Origins of Clojure - Hash Array Mapped Trie}
+  
+}
+
 
 
 \frame{
@@ -177,8 +225,6 @@
     \item Javascipt (V8/Node)
     %\pause
     \item CLR/IOS/Android
-    %pause
-    \item Convenient data literal syntax
 
 % 
 % Mention clojurescript has laid the ground-work of clojure-in-clojure
@@ -193,11 +239,11 @@
 \frame{
   \frametitle{Clojure's Worldview}
   \begin{itemize}
-    \item Object Oriented Programming Is Overrated
-    \item Mutable State Makes Concurrency Hard
-    \item Data First
+    \item OO is not always the best approach
+    \item Mutable state makes concurrency hard
+    \item Data Centric
     \item VMs not Operating Systems
-    \item Fight with the Army we Have
+    \item Fight with the army we have
   \end{itemize}
 }
 
@@ -253,7 +299,10 @@
   \frametitle{Functions}
   Typical function definition:
   \begin{minted}[linenos=false,fontsize=\normalsize]{clojure}
-    (defn foo "optional doc comment" [a b]
+    (defn foo 
+      "optional multiline 
+       doc comment" 
+     [arg1 arg2]
      (...implementation...))
   \end{minted}
   \vspace{1 cm}
@@ -325,7 +374,7 @@
   
   \itemize{
     \item javadoc (open javadoc while in repl?)
-    \item memfn
+    % defunct \item memfn 
     \item dot special form
     \item bean
   }
@@ -342,6 +391,12 @@
 % Useful repl stuff here...inspect-tree inspect-table javadoc doc source
 \end{frame}
 
+\begin{frame}
+  \frametitle{REPL Debugging}
+%
+% pst - very useful!
+
+\end{frame}
 
 \begin{frame}
   \frametitle{Code Samples} 

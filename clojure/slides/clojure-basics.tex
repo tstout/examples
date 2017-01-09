@@ -1,6 +1,7 @@
 % 
 % Compile with 'pdflatex -shell-escape clojure-basics.tex'
-%
+% I use the mactex distro of Tex. https://tug.org/mactex/
+% 
 
 \documentclass{beamer}
 
@@ -15,6 +16,8 @@
 \usepackage[scaled]{beramono}
 \usepackage{minted}
 \usepackage{xcolor}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.6} 
 
 \newcommand\Small{\fontsize{5}{5.2}\selectfont}
 \newcommand*\LSTfont{\Small\ttfamily\SetTracking{encoding=*}{-60}\lsstyle}
@@ -23,10 +26,11 @@
 \hypersetup{colorlinks=color, linkcolor=black}
 \definecolor{OliveGreen}{rgb}{0,0.6,0}
 \graphicspath{{./images/}}
-%
+% 
 % Turn off beamer nav stuff...
-%
+% 
 \setbeamertemplate{navigation symbols}{}
+
 
 \input{lst-config/clojure-config}
 \begin{document}
@@ -37,26 +41,22 @@
     \includegraphics[scale=.40]{Clojure-Logo}
   }
 
+  % Look at wikimedia commons for fair use pictures
 
-% Look at wikimedia commons for fair use pictures
-
-%  June 2014
-% TODO - Mention Phil Bagwell's persistent data structures.
-% Multimethods - https://pragprog.com/magazines/2011-07/growing-a-dsl-with-clojure
 \end{frame}
 
 \frame{
   \frametitle{Origins of Clojure - Church}
   \begin{columns}
-    \begin{column}{.60\textwidth}
+    \begin{column}{.49\textwidth}
       \includegraphics[scale=.50]{church}
     \end{column}
     \begin{column}{.49\textwidth}
       \itemize{
-        \item Alonzo Church - 1936
-        \item $\lambda$ Calculus
-          \footnote{\href{https://www.ics.uci.edu/~lopes/teaching/inf212W12/readings/church.pdf}
-            {An Unsolvable Problem of Elementary Number Theory}}
+      \item Alonzo Church - 1936
+      \item $\lambda$ Calculus
+        \footnote{\href{https://www.ics.uci.edu/~lopes/teaching/inf212W12/readings/church.pdf}
+          {An Unsolvable Problem of Elementary Number Theory}}
       }
     \end{column}
   \end{columns}
@@ -66,10 +66,10 @@
   \frametitle{Origins of Clojure - McCarthy}
   \begin{columns}
     \begin{column}{.49\textwidth}
-      \includegraphics[scale=1]{john-mccarthy}
+      \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{john-mccarthy}
     \end{column}
     \begin{column}{.49\textwidth}
-      \vspace {4 cm}
+      % \vspace {4 cm}
       \itemize{
       \item John McCarthy - 1958
       \item
@@ -96,26 +96,26 @@
       \includegraphics[scale=1.35]{ibm-704}
       \vspace {.125 cm}
       IBM-704
-      \end{column}
-   \end{columns}
+    \end{column}
+  \end{columns}
 }
 
 \frame{
   \frametitle{Notable Attributes of the Original Lisp}
   \begin{itemize}
-    \item Conditionals
-    \item A function type
-    \item Recursion
-    \item Variables as pointers
-    \item Garbage Collection
+  \item Conditionals
+  \item A function type
+  \item Recursion
+  \item Variables as pointers
+  \item Garbage Collection
   \end{itemize}
 }
 
 \frame{
   \frametitle{Many Lisp Implementations}
-%
-% TODO add more...
-%
+  % 
+  % TODO add more...
+  % 
   \begin{itemize}
   \item Maclisp - Late 1960s \footnote{Not created by Apple}
   \item Scheme - 1975 (Guile, Racket, Chicken) 
@@ -127,20 +127,20 @@
 
 
 % \frame{
-%   \frametitle{Scheme 1975-1980}
-%   \begin{columns}
-%     \begin{column}{.49\textwidth}
-%       Guy Steele
-%       \includegraphics[scale=.25]{guy-steele}
-%     \end{column}
-%     \begin{column}{.49\textwidth}
-%       Gerald Sussman
-%       \includegraphics[scale=.80]{gerald-sussman}
-%     \end{column}
-%   \end{columns}
+% \frametitle{Scheme 1975-1980}
+% \begin{columns}
+%   \begin{column}{.49\textwidth}
+%     Guy Steele
+%     \includegraphics[scale=.25]{guy-steele}
+%   \end{column}
+%   \begin{column}{.49\textwidth}
+%     Gerald Sussman
+%     \includegraphics[scale=.80]{gerald-sussman}
+%   \end{column}
+% \end{columns}
 % }
 
-% \frame{
+%   \frame{
 %   \frametitle{Common LISP}
 %   Dates????? - major contributors ...
 % }
@@ -160,7 +160,7 @@
       \begin{itemize}
         
       \item \href{http://www.cs.cmu.edu/~sleator/papers/another-persistence.pdf}{\color{blue}{
-        Making Data Structures Persistent}}
+            Making Data Structures Persistent}}
       \item Logarithmic access, insertion, and deletion times
       \item $O$(1)
 
@@ -175,27 +175,41 @@
   \frametitle{Origins of Clojure - Bagwell 2001}
   \begin {columns}
     \begin{column}{.49\textwidth}
-    \includegraphics[scale=1]{phil-bagwell}
+      \includegraphics[scale=1]{phil-bagwell}
       \vspace {.25 cm}
-   \end{column}
-   \begin{column}{.49\textwidth}
-     \begin{itemize}
+    \end{column}
+    \begin{column}{.49\textwidth}
+      \begin{itemize}
       \item \href
-      {https://infoscience.epfl.ch/record/64398/files/idealhashtrees.pdf}{\color{blue}{
-      Ideal Hash Trees}}
+        {https://infoscience.epfl.ch/record/64398/files/idealhashtrees.pdf}{\color{blue}{
+            Ideal Hash Trees}}
       \item Hash Array Mapped Trie
       \end{itemize}
 
-   \end{column}
-   \end{columns}
+    \end{column}
+  \end{columns}
   Phil Bagwell
 }
 
 \frame{
   \frametitle{Origins of Clojure - Hash Array Mapped Trie}
-  
+  \begin{tikzpicture}
+    \begin{semilogxaxis}[
+      xmin=1,
+      xmax=1000000000,
+      domain=1:1000000000,
+      ylabel=$\log_{32} n$]
+      % 
+      % recall that log32(x) = log10(x) / log10(32)
+      % 
+      \addplot[
+      red,
+      ]
+      {log10(x) / log10(32)};
+    \end{semilogxaxis}
+  \end{tikzpicture}
+  Effectively Constant Time
 }
-
 
 
 \frame{
@@ -209,41 +223,41 @@
 \frame{
   \frametitle{Yet Another LISP?}
   \begin{itemize}
-    %\pause
-    \item Immutability is the Default 
-    %\pause
-    \item Persistent Collections
-    %\pause
-    \item Unified Sequences (Lists, Maps, Vectors, Sets)
-    %\pause
-    \item Concurrency Support
-    %\pause
-    \item Designed to rely on (and embrace) a host platform
-    %\pause
-    \item JVM
-    %\pause
-    \item Javascipt (V8/Node)
-    %\pause
-    \item CLR/IOS/Android
+    % \pause
+  \item Immutability is the Default 
+    % \pause
+  \item Persistent Collections
+    % \pause
+  \item Unified Sequences (Lists, Maps, Vectors, Sets)
+    % \pause
+  \item Concurrency Support
+    % \pause
+  \item Designed to rely on (and embrace) a host platform
+    % \pause
+  \item JVM
+    % \pause
+  \item Javascipt (V8/Node)
+    % \pause
+  \item CLR/IOS/Android
 
-% 
-% Mention clojurescript has laid the ground-work of clojure-in-clojure
-%
+    % 
+    % Mention clojurescript has laid the ground-work of clojure-in-clojure
+    % 
     % \item Embraces the host platform (Predominantly the JVM)
-    % \pause
+    %   \pause
     % \item Clojurescript brings Clojure to the browser/node environment
-    % \pause
+    %   \pause
   \end{itemize}
 }
 
 \frame{
   \frametitle{Clojure's Worldview}
   \begin{itemize}
-    \item OO is not always the best approach
-    \item Mutable state makes concurrency hard
-    \item Data Centric
-    \item VMs not Operating Systems
-    \item Fight with the army we have
+  \item OO is not always the best approach
+  \item Mutable state makes concurrency hard
+  \item Data Centric
+  \item VMs not Operating Systems
+  \item Fight with the army we have
   \end{itemize}
 }
 
@@ -270,8 +284,8 @@
     \hline
     \emph{List} & '() & '(1 2 3) \\
     \hline
-%    \emph{Regex} & \#"" & \#"*.clj" \\    
-%    \hline
+    % \emph{Regex} & \#"" & \#"*.clj" \\    
+    % \hline
   \end{tabularx}
 
   \vspace{.5cm}
@@ -280,42 +294,42 @@
 \end{frame}
 
 \begin{frame}
-\frametitle{Limited Syntax Budget}
-\begin{itemize}
+  \frametitle{Limited Syntax Budget}
+  \begin{itemize}
   \item Data Literals 
   \item Reader Macros
   \item Destructuring
-\end{itemize}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
-\frametitle{Syntax Sugar (Reader Macros)}
-%
-% put table here...
-%
+  \frametitle{Syntax Sugar (Reader Macros)}
+  % 
+  % put table here...
+  % 
 \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Functions}
   Typical function definition:
-  \begin{minted}[linenos=false,fontsize=\normalsize]{clojure}
+  \begin{minted}[fontsize=\normalsize]{clojure}
     (defn foo 
-      "optional multiline 
-       doc comment" 
-     [arg1 arg2]
-     (...implementation...))
+    "optional multiline 
+    doc comment" 
+    [arg1 arg2]
+    (...implementation...))
   \end{minted}
   \vspace{1 cm}
 
   This is an anonymous function (sum of its args):
-  \begin{minted}[lineos=false,fontsize=\normalsize]{clojure}
-  (fn [a b] (+ a b))   
+  \begin{minted}[fontsize=\normalsize]{clojure}
+    (fn [a b] (+ a b))   
   \end{minted}
   \vspace{1 cm}
 
   An abbreviated equivalent:
-  \begin{minted}[lineos=false,fontsize=\normalsize]{clojure}
-  #(+ %1 %2)
+  \begin{minted}[fontsize=\normalsize]{clojure}
+    #(+ %1 %2)
   \end{minted}
 \end{frame}
 
@@ -350,7 +364,7 @@
 
 \begin{frame}
   \frametitle{Map Binding Forms}
-% Look here from some inspiration http://stuartsierra.com/2010/01/15/keyword-arguments-in-clojure
+  % Look here from some inspiration http://stuartsierra.com/2010/01/15/keyword-arguments-in-clojure
 \end{frame}
 
 \begin{frame}
@@ -373,10 +387,10 @@
   \frametitle{Java Interop}
   
   \itemize{
-    \item javadoc (open javadoc while in repl?)
+  \item javadoc (open javadoc while in repl?)
     % defunct \item memfn 
-    \item dot special form
-    \item bean
+  \item dot special form
+  \item bean
   }
 \end{frame}
 
@@ -387,14 +401,14 @@
 
 \begin{frame}
   \frametitle{REPL}
-%
-% Useful repl stuff here...inspect-tree inspect-table javadoc doc source
+  % 
+  % Useful repl stuff here...inspect-tree inspect-table javadoc doc source
 \end{frame}
 
 \begin{frame}
   \frametitle{REPL Debugging}
-%
-% pst - very useful!
+  % 
+  % pst - very useful!
 
 \end{frame}
 
@@ -405,16 +419,16 @@
 
 \begin{frame}
   \frametitle{Resources}
-% Cheat sheets - destructuring and main one from clojure.org
+  % Cheat sheets - destructuring and main one from clojure.org
 \end{frame}
 
 % 
 % Let over lambda example...can simplify with #()
-%
+% 
 % (defn db-layer [db-connection]
-%   (let [db-operations {:save (fn [obj] (save db-connection obj))
-%                        :delete (fn [obj] (delete db-connection obj))
-%                        :query (fn [query] (query db-connection query))}]
-%     (fn [operation & params]
-%       (-> (db-operations operation) (apply params)))))
+% (let [db-operations {:save (fn [obj] (save db-connection obj))
+% :delete (fn [obj] (delete db-connection obj))
+% :query (fn [query] (query db-connection query))}]
+% (fn [operation & params]
+% (-> (db-operations operation) (apply params)))))
 \end{document}

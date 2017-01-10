@@ -193,22 +193,28 @@
 
 \frame{
   \frametitle{Origins of Clojure - Hash Array Mapped Trie}
-  \begin{tikzpicture}
-    \begin{semilogxaxis}[
-      xmin=1,
-      xmax=1000000000,
-      domain=1:1000000000,
-      ylabel=$\log_{32} n$]
-      % 
-      % recall that log32(x) = log10(x) / log10(32)
-      % 
-      \addplot[
-      red,
-      ]
-      {log10(x) / log10(32)};
-    \end{semilogxaxis}
-  \end{tikzpicture}
-  Effectively Constant Time
+  \center { $O(log_{32} n)$ Effectively Constant Time}
+  %\vspace {.25 cm}
+  \center{
+    \begin{tikzpicture}
+      \begin{semilogxaxis}[
+        xmin=1,
+        xmax=1000000000,
+        domain=1:1000000000,
+        ylabel=$\log_{32} n$,
+        xlabel=n]
+        % 
+        % recall that log32(x) = log10(x) / log10(32)
+        % 
+        \addplot[
+        red,
+        ]
+        {log10(x) / log10(32)};
+      \end{semilogxaxis}
+    \end{tikzpicture}
+  }
+  %\vspace {.25 cm}
+  %\center{ \tiny{Effectively Constant Time} }
 }
 
 

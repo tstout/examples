@@ -17,6 +17,7 @@
 \usepackage{minted}
 \usepackage{xcolor}
 \usepackage{pgfplots}
+%\usepackage{enumitem}
 \pgfplotsset{compat=1.6} 
 
 \newcommand\Small{\fontsize{5}{5.2}\selectfont}
@@ -86,16 +87,19 @@
 }
 
 \frame{
-  \frametitle{Origins of Clojure - Russell}
+  \frametitle{Origins of Clojure - Steve Russell}
   \begin {columns}
     \begin{column}{.49\textwidth}
-      \includegraphics[scale=1.25]{steve-russell}
-      Steve Russell - First Lisp interpreter
+      \begin{itemize}
+      \item[] \includegraphics[scale=1.25]{steve-russell}
+      \item[] First Lisp interpreter
+      \end{itemize}
     \end{column}
     \begin{column}{.49\textwidth}
-      \includegraphics[scale=1.35]{ibm-704}
-      \vspace {.125 cm}
-      IBM-704
+      \begin{itemize}
+      \item[]\includegraphics[scale=1.35]{ibm-704}
+      \item[]IBM-704
+      \end{itemize}
     \end{column}
   \end{columns}
 }
@@ -198,6 +202,9 @@
   \center{
     \begin{tikzpicture}
       \begin{semilogxaxis}[
+        grid=both,
+        grid style={line width=.1pt, draw=gray!10},
+        major grid style={line width=.2pt,draw=gray!50},
         xmin=1,
         xmax=1000000000,
         domain=1:1000000000,

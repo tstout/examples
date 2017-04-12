@@ -36,4 +36,4 @@
     (swap! a1 dissoc :me))))
 
 
-(run-all-tests)
+;;(run-all-tests)

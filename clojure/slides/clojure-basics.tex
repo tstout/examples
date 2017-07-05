@@ -265,11 +265,12 @@
 \frame{
   \frametitle{Clojure's Worldview}
   \begin{itemize}
-  \item OO is not always the best approach
-  \item Mutable state makes concurrency hard
-  \item Data Centric
+  \item Data Centric 
+  \item OO is usually not the best approach
+  \item Mutable state makes concurrency, and most other things hard
   \item VMs not Operating Systems
-  \item Fight with the army we have
+  \item Fight with the army we have (parasitic language)
+  \item There is wisdom in history
   \end{itemize}
 }
 
@@ -280,6 +281,10 @@
 % numerous occasions that Clojure has value to the degree that it lets
 % you build interesting and useful applications.
 
+
+% TODO - revaluate if this table is helpful for an introduction.
+% Update - I don't think it is. Remove for now...
+% 
 \begin{frame}
   \frametitle{Core Clojure Syntax}
   \begin{tabularx}{\textwidth}{ |X|X|X| }
@@ -378,7 +383,7 @@
   \frametitle{Sequences}
   \itemize {
   \item Referred to as Seqs (pronouced seeks)
-  \item Unified interface for maps, lists, trees, and arrays  
+  \item Unified interface for maps, lists, vectors, and sets  
   }
 \end{frame}
 

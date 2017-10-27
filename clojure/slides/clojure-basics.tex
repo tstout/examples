@@ -17,6 +17,7 @@
 \usepackage{minted}
 \usepackage{xcolor}
 \usepackage{pgfplots}
+
 %\usepackage{enumitem}
 \pgfplotsset{compat=1.6} 
 
@@ -122,7 +123,7 @@
   % TODO add more...
   % 
   \begin{itemize}
-  \item Maclisp - Late 1960s \footnote{Not created by Apple}
+  \item Maclisp - Late 1960s \footnote{MIT, not Apple}
   \item Scheme - 1975 (Guile, Racket, Chicken) 
   \item Common LISP - 1984
   \item Emacs LISP - 1985
@@ -266,10 +267,11 @@
   \frametitle{Clojure's Worldview}
   \begin{itemize}
   \item Data Centric 
-  \item OO is usually not the best approach
+  \item Data should not be hidden behind objects
   \item Mutable state makes concurrency, and most other things hard
   \item VMs not Operating Systems
-  \item Fight with the army we have (parasitic language)
+  \item Fight with the army we have (parasitic language - rely on a
+    host env)
   \item There is wisdom in history
   \end{itemize}
 }
@@ -283,7 +285,7 @@
 
 
 % TODO - revaluate if this table is helpful for an introduction.
-% Update - I don't think it is. Remove for now...
+% Update - I don't think it is. Should probably Remove for now...
 % 
 \begin{frame}
   \frametitle{Core Clojure Syntax}
@@ -309,6 +311,24 @@
   Everything is simply (func-name arg1 arg2 ...) where arguments can
   be other functions or data structures. 
 \end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Core Clojure Syntax}
+A vector of integers:
+  \begin{minted}[fontsize=\normalsize]{clojure}
+    [8 6 7 5 309]
+  \end{minted}
+A map:
+  \begin{minted}[fontsize=\normalsize]{clojure}
+    {:first-name "Tommy" :last-name "Tutone"}
+  \end{minted}
+A set:
+  \begin{minted}[fontsize=\normalsize]{clojure}
+    #{1 77 6}
+  \end{minted}
+
+\end{frame}
+
 
 \begin{frame}
   \frametitle{Limited Syntax Budget}

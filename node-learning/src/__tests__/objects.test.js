@@ -25,6 +25,31 @@ describe("Object Intrinsics", () => {
   it("Spread operator can be applied in object literals (alternative to Object.assign()", () => {
     const foo = { a: 1, b: 2 };
 
-    expect({ ...foo, c: 3 }).toEqual({ a: 1, b: 2, c: 3 });
+    //expect({ ...foo, c: 3 }).toEqual({ a: 1, b: 2, c: 3 });
+  });
+
+  it("Array-like access is supported", () => {
+    const foo = { a: 1, b: 2 };
+
+    // this can be useful for computed keys
+    expect(foo["a"]).toEqual(1);
+  });
+
+  describe("Destructuring", () => {
+    it("Assign a subset of an object to local variables", () => {
+      const objectWithManyKeys = { a: 1, b: 2, c: 3, d: 4 };
+      const { a, d } = objectWithManyKeys;
+
+      expect(a).toEqual(1);
+      expect(d).toEqual(4);
+    });
+
+    it("Assign local alias of object subset", () => {
+      const objectWithManyKeys = { a: 1, b: 2, c: 3, d: 4 };
+      const { a: new_a, b: new_b } = objectWithManyKeys;
+
+      expect(new_a).toEqual(1);
+      expect(new_b).toEqual(2);
+    });
   });
 });

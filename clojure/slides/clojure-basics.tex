@@ -17,6 +17,7 @@
 \usepackage{minted}
 \usepackage{xcolor}
 \usepackage{pgfplots}
+\usepackage{dirtytalk}
 
 %\usepackage{enumitem}
 \pgfplotsset{compat=1.6} 
@@ -89,7 +90,7 @@
 }
 
 \frame{
-  \frametitle{Origins of Clojure - Steve Russell}
+  \frametitle{Origins of Clojure - Steve Russell 1958}
   \begin {columns}
     \begin{column}{.49\textwidth}
       \begin{itemize}
@@ -150,7 +151,7 @@
 
 
 \frame{
-  \frametitle{Persistent Data Structures - 1986}
+  \frametitle{Persistent Data Structures - 1989}
   \begin {columns}
     \begin{column}{.49\textwidth}
       \begin{itemize}
@@ -165,10 +166,6 @@
         
       \item \href{http://www.cs.cmu.edu/~sleator/papers/another-persistence.pdf}{\color{blue}{
             Making Data Structures Persistent}}
-      \item Logarithmic access, insertion, and deletion times
-      \item $O$(1)
-
-      \item 
       \end{itemize}
     \end{column}
   \end{columns}
@@ -187,7 +184,7 @@
       \item \href
         {https://infoscience.epfl.ch/record/64398/files/idealhashtrees.pdf}{\color{blue}{
             Ideal Hash Trees}}
-      \item Hash Array Mapped Trie
+      \item Hash Array Mapped Trie (HAMT)
       \end{itemize}
 
     \end{column}
@@ -276,6 +273,23 @@
   \end{itemize}
 }
 
+\frame{
+  \frametitle {Obligatory Quote}
+  \say{  Some programming languages have been created primarily to demonstrate
+    a particular nugget of academia or to explore certain theories of
+    computation. Clojure is not one of these. Rich Hickey has said on
+    numerous occasions that Clojure has value to the degree that it lets
+    you build interesting and useful applications.}
+  \rightline{{\rm --- The Joy of Clojure}}
+}
+
+\frame{
+  \frametitle {Obligatory Quote}
+  \say {By relieving the brain of all unnecessary work, a good notation sets
+    it free to concentrate on more advanced problems.}
+  \rightline{{\rm --- Alfred North Whitehead}}
+}
+
 % -- Nice Quote from Joy of Clojure --
 % Some programming languages have been created primarily to demonstrate
 % a particular nugget of academia or to explore certain theories of
@@ -308,9 +322,10 @@
   \end{tabularx}
 
   \vspace{.5cm}
-  Everything is simply (func-name arg1 arg2 ...) where arguments can
+  Everything is simply (fn/macro-name arg1 arg2 ...) where arguments can
   be other functions or data structures. 
 \end{frame}
+
 
 \begin{frame}[fragile]
 \frametitle{Core Clojure Syntax}
@@ -324,27 +339,32 @@ A map:
   \end{minted}
 A set:
   \begin{minted}[fontsize=\normalsize]{clojure}
-    #{1 77 6}
+    #{19 81}
   \end{minted}
-
+A map of various structures:
+\begin{minted}[fontsize=\normalsize]{clojure}
+  {:phone-numbers ["977-571-3853" "972-571-7477"]
+   :zip-codes [75019 75089 75080]}
+  \end{minted}  
+  
 \end{frame}
 
 
-\begin{frame}
-  \frametitle{Limited Syntax Budget}
-  \begin{itemize}
-  \item Data Literals 
-  \item Reader Macros
-  \item Destructuring
-  \end{itemize}
-\end{frame}
+%% \begin{frame}
+%%   \frametitle{Limited Syntax Budget}
+%%   \begin{itemize}
+%%   \item Data Literals 
+%%   \item Reader Macros
+%%   \item Destructuring
+%%   \end{itemize}
+%% \end{frame}
 
-\begin{frame}
-  \frametitle{Syntax Sugar (Reader Macros)}
-  % 
-  % put table here...
-  % 
-\end{frame}
+%% \begin{frame}
+%%   \frametitle{Syntax Sugar (Reader Macros)}
+%%   % 
+%%   % put table here...
+%%   % 
+%% \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Functions}

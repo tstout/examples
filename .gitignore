@@ -21,3 +21,7 @@ target
 *.out
 *.toc
 *.snm
+*.log
+*.pdf
+*.vrb
+_minted

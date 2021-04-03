@@ -18,6 +18,8 @@
 \usepackage{xcolor}
 \usepackage{pgfplots}
 \usepackage{dirtytalk}
+\usepackage{tikz}
+\usetikzlibrary{tikzmark,fit}
 
 %\usepackage{enumitem}
 \pgfplotsset{compat=1.6} 
@@ -269,9 +271,13 @@
   \item VMs not Operating Systems
   \item Fight with the army we have (parasitic language - rely on a
     host env)
+  \item Disciplined Evolution
   \item There is wisdom in history
   \end{itemize}
 }
+
+% Consider borrowing some ideas from this: 
+%https://www.reddit.com/r/Clojure/comments/mcuq3s/clojure_in_a_nutshell_by_james_trunk/?utm_source=share&utm_medium=web2x&context=3
 
 \frame{
   \frametitle {Obligatory Quote}
@@ -307,7 +313,7 @@
     \hline
     \emph{function invocation} & (fn-name fn-arg...)  &  (foo 1 2 3) \\ 
     \hline
-    \emph{Keyword} & :some-keyword  & :foo \\ 
+    \emph{Keyword} & :key  & :foo \\ 
     \hline
     \emph{Map} &    \{\}  & \{:a 1 :b 2 :c 3\} \\ 
     \hline
@@ -328,25 +334,21 @@
 
 
 \begin{frame}[fragile]
-\frametitle{Core Clojure Syntax}
-A vector of integers:
+  \frametitle{Core Clojure Syntax}
   \begin{minted}[fontsize=\normalsize]{clojure}
-    [8 6 7 5 309]
-  \end{minted}
-A map:
-  \begin{minted}[fontsize=\normalsize]{clojure}
-    {:first-name "Tommy" :last-name "Tutone"}
-  \end{minted}
-A set:
-  \begin{minted}[fontsize=\normalsize]{clojure}
-    #{19 81}
-  \end{minted}
-A map of various structures:
-\begin{minted}[fontsize=\normalsize]{clojure}
-  {:phone-numbers ["977-571-3853" "972-571-7477"]
-   :zip-codes [75019 75089 75080]}
-  \end{minted}  
-  
+;vector
+[8 6 7 5 309]                                  
+
+;map
+{:first-name "Tommy" :last-name "Tutone"}      
+
+;set
+#{19 81}                                       
+
+;composite structure
+{:phone-numbers ["977-571-3853" "972-571-7477"] 
+ :zip-codes     [75019 75089 75080]}
+\end{minted}  
 \end{frame}
 
 
@@ -369,14 +371,16 @@ A map of various structures:
 \begin{frame}[fragile]
   \frametitle{Functions}
   Typical function definition:
-  \begin{minted}[fontsize=\normalsize]{clojure}
+  \begin{minted}[fontsize=\normalsize,escapeinside=||]{clojure}
     (defn foo 
-    "optional multiline 
-    doc comment" 
-    [arg1 arg2]
-    (...implementation...))
+      "optional multiline doc comment" 
+      [arg1 arg2]
+      (...implementation...))
   \end{minted}
+
   \vspace{1 cm}
+
+%% [autogobble,fontfamily=myfont,escapeinside=||}{c}
 
   This is an anonymous function (sum of its args):
   \begin{minted}[fontsize=\normalsize]{clojure}
@@ -391,7 +395,7 @@ A map of various structures:
 \end{frame}
 
 \begin{frame}
-  \frametitle{Multiple-arity Functions (Overloading)}
+  \frametitle{Multiple-arity Functions}
 \end{frame}
 
 \begin{frame}

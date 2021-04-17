@@ -92,7 +92,7 @@
 }
 
 \frame{
-  \frametitle{Origins of Clojure - Steve Russell 1958}
+  \frametitle{Origins of Clojure - Steve Russell - 1958}
   \begin {columns}
     \begin{column}{.49\textwidth}
       \begin{itemize}
@@ -123,19 +123,22 @@
 \frame{
   \frametitle{Many Lisp Implementations}
   % 
-  % TODO add more...
+  % TODO add more?
   % 
   \begin{itemize}
   \item Maclisp - Late 1960s \footnote{MIT, not Apple}
-  \item Scheme - 1975 (Guile, Racket, Chicken) 
-  \item Common LISP - 1984
-  \item Emacs LISP - 1985
+  \item Scheme - 1970s (Guile, Racket, Chicken) 
+  \item Emacs LISP - 1976
+  \item Common LISP - 1984 (CLISP, CMUCL, SBCL, ABCL, MKCL)
   \item AutoLISP - 1986
+  \item Apple Dylan - 1992
+  \item Clojure - 2007
+  \item Arc - 2008
   \end{itemize}
 }
 
 \frame{
-  \frametitle{Communicating Sequential Processes (CSP) 1977}
+  \frametitle{Origins of Clojure - Communicating Sequential Processes (CSP) - 1977}
   \begin {columns}
     \begin{column}{.49\textwidth}
       \begin{itemize}
@@ -153,7 +156,7 @@
 
 
 \frame{
-  \frametitle{Persistent Data Structures - 1989}
+  \frametitle{Origin of Clojure - Persistent Data Structures - 1989}
   \begin {columns}
     \begin{column}{.49\textwidth}
       \begin{itemize}
@@ -175,7 +178,7 @@
 
 
 \frame{
-  \frametitle{Origins of Clojure - Bagwell 2001}
+  \frametitle{Origins of Clojure - Bagwell - 2001}
   \begin {columns}
     \begin{column}{.49\textwidth}
       \includegraphics[scale=1]{phil-bagwell}
@@ -250,7 +253,7 @@
     % \pause
   \item Javascipt (Browser and Node)
     % \pause
-  \item CLR
+  \item CLR (.NET)
 
     % 
     % Mention clojurescript has laid the ground-work of clojure-in-clojure
@@ -281,7 +284,7 @@
 
 \frame{
   \frametitle {Obligatory Quote}
-  \say{  Some programming languages have been created primarily to demonstrate
+  \say{Some programming languages have been created primarily to demonstrate
     a particular nugget of academia or to explore certain theories of
     computation. Clojure is not one of these. Rich Hickey has said on
     numerous occasions that Clojure has value to the degree that it lets
@@ -296,14 +299,6 @@
   \rightline{{\rm --- Alfred North Whitehead}}
 }
 
-% -- Nice Quote from Joy of Clojure --
-% Some programming languages have been created primarily to demonstrate
-% a particular nugget of academia or to explore certain theories of
-% computation. Clojure is not one of these. Rich Hickey has said on
-% numerous occasions that Clojure has value to the degree that it lets
-% you build interesting and useful applications.
-
-
 % TODO - revaluate if this table is helpful for an introduction.
 % Update - I don't think it is. Should probably Remove for now...
 % 
@@ -311,7 +306,7 @@
   \frametitle{Core Clojure Syntax}
   \begin{tabularx}{\textwidth}{ |X|X|X| }
     \hline
-    \emph{function invocation} & (fn-name fn-arg...)  &  (foo 1 2 3) \\ 
+    \emph{Function invocation} & (fn-name fn-arg...)  &  (foo 1 2 3) \\ 
     \hline
     \emph{Keyword} & :key  & :foo \\ 
     \hline
@@ -323,19 +318,31 @@
     \hline
     \emph{List} & '() & '(1 2 3) \\
     \hline
-    % \emph{Regex} & \#"" & \#"*.clj" \\    
-    % \hline
+    \emph{Regex} & \#"" & \#"*.clj" \\    
+    \hline
   \end{tabularx}
 
   \vspace{.5cm}
-  Everything is simply (fn/macro-name arg1 arg2 ...) where arguments can
-  be other functions or data structures. 
+  Syntax is essentially (fn/macro-name arg1 arg2 ...) where arguments can
+  be functions, constants, or data literals. 
 \end{frame}
-
 
 \begin{frame}[fragile]
   \frametitle{Core Clojure Syntax}
-  \begin{minted}[fontsize=\normalsize]{clojure}
+  \center{
+    \includegraphics[scale=.4]{clojure-form}
+  }
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Core Clojure Syntax - Data Literals}
+  \begin{minted}[fontsize=\small]{clojure}
+;keyword
+:jenny
+
+;list
+'(1 2 3 4 5)
+
 ;vector
 [8 6 7 5 309]                                  
 
@@ -345,11 +352,53 @@
 ;set
 #{19 81}                                       
 
-;composite structure
-{:phone-numbers ["977-571-3853" "972-571-7477"] 
- :zip-codes     [75019 75089 75080]}
+;regex
+#"^(.+)@(.+)$"
 \end{minted}  
 \end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Core Clojure Syntax - Data Literals}
+  \begin{minted}[fontsize=\tiny]{java}
+package cafebabe.prototypes;
+
+public class Empty {
+}
+  \end{minted}
+  \begin{minted}[fontsize=\tiny]{clojure}
+;composite structure
+
+{:header        {:magic 3405691582 :major-version 0 :minor-version 52}
+ :constant-pool [{:constant-type :c-method-ref :class-index 3 :name-and-type-index 10}
+                 {:constant-type :c-class :name-index 11}
+                 {:constant-type :c-class :name-index 12}
+                 {:constant-type :c-utf8 :str "<init>"}
+                 {:constant-type :c-utf8 :str "()V"}
+                 {:constant-type :c-utf8 :str "Code"}
+                 {:constant-type :c-utf8 :str "LineNumberTable"}
+                 {:constant-type :c-utf8 :str "SourceFile"}
+                 {:constant-type :c-utf8 :str "Empty.java"}
+                 {:constant-type :c-name-and-type :descriptor-index 4 :name-index 5}
+                 {:constant-type :c-utf8 :str "cafebabe/prototypes/Empty"}
+                 {:constant-type :c-utf8 :str "java/lang/Object"}]
+ :access-flags  33
+ :this-class    2
+ :super-class   3
+ :interfaces    []
+ :fields        []
+ :methods       [{:access-flags     1
+                  :name-index       4
+                  :descriptor-index 5
+                  :attributes       [{:attribute-name-index 6
+                                      :info                 [0 1 0 1 0 0 0 5 183 0 1 177 0 0
+                                                             0 1 0 7 0 0 0 6 0 1 0 0 0 6]}]}]
+ :attributes    [{:attribute-name-index 8 :info [0 9]}]}
+
+\end{minted}  
+\end{frame}
+
+
+
 
 
 %% \begin{frame}
@@ -395,7 +444,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Multiple-arity Functions}
+  \frametitle{Multi-arity Functions}
 \end{frame}
 
 \begin{frame}
@@ -492,9 +541,31 @@
 \end{frame}  
 
 \begin{frame}
-  \frametitle{Resources}
-  % Cheat sheets - destructuring and main one from clojure.org
+  \frametitle{Clojure}
+  \center{
+    \includegraphics[scale=.20]{clojure-cave}
+  }
+
+  % Look at wikimedia commons for fair use pictures
+
 \end{frame}
+
+
+\frame {
+  \frametitle{Resources}
+  \begin{itemize}
+
+  \item \href {https://www.clojure-toolbox.com/}
+    {\color {blue}{Curated List of Libraries}}
+
+  \item \href{https://github.com/edn-format/edn}
+    {\color {blue}{Extensible Data Notation (EDN)}}
+
+  \item \href{https://github.com/tstout/examples/blob/master/clojure/slides/clojure-basics.tex}
+       {\color {blue}{Code for this document}}
+
+  \end{itemize}
+  }
 
 % 
 % Let over lambda example...can simplify with #()

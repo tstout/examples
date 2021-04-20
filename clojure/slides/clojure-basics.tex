@@ -45,10 +45,17 @@
   \center{
     \includegraphics[scale=.40]{Clojure-Logo}
   }
-
-  % Look at wikimedia commons for fair use pictures
-
 \end{frame}
+
+\frame{
+  \frametitle {Clojure}
+  \say{The objective for Clojure can be summarized most succinctly as: I
+    wanted a language as acceptable as Java or C\#, but supporting a much 
+    simpler programming model, to use for the kinds of information system 
+    development I had been doing professionally.}
+
+  \rightline{{\rm --- Rich Hickey}}
+}
 
 \frame{
   \frametitle{Origins of Clojure - Church}
@@ -330,29 +337,29 @@
 \begin{frame}[fragile]
   \frametitle{Core Clojure Syntax}
   \center{
-    \includegraphics[scale=.4]{clojure-form}
+    \includegraphics[scale=.25]{clojure-form}
   }
 \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Core Clojure Syntax - Data Literals}
   \begin{minted}[fontsize=\small]{clojure}
-;keyword
+;;keyword
 :jenny
 
-;list
+;;list
 '(1 2 3 4 5)
 
-;vector
+;;vector
 [8 6 7 5 309]                                  
 
-;map
+;;map
 {:first-name "Tommy" :last-name "Tutone"}      
 
-;set
+;;set
 #{19 81}                                       
 
-;regex
+;;regex
 #"^(.+)@(.+)$"
 \end{minted}  
 \end{frame}
@@ -366,7 +373,7 @@ public class Empty {
 }
   \end{minted}
   \begin{minted}[fontsize=\tiny]{clojure}
-;composite structure
+;;composite structure
 
 {:header        {:magic 3405691582 :major-version 0 :minor-version 52}
  :constant-pool [{:constant-type :c-method-ref :class-index 3 :name-and-type-index 10}
@@ -397,10 +404,6 @@ public class Empty {
 \end{minted}  
 \end{frame}
 
-
-
-
-
 %% \begin{frame}
 %%   \frametitle{Limited Syntax Budget}
 %%   \begin{itemize}
@@ -416,6 +419,9 @@ public class Empty {
 %%   % put table here...
 %%   % 
 %% \end{frame}
+
+
+
 
 \begin{frame}[fragile]
   \frametitle{Functions}
@@ -443,12 +449,55 @@ public class Empty {
   \end{minted}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Multi-arity Functions}
+  \begin{minted}[fontsize=\normalsize]{clojure}
+  
+  (defn make-set 
+    ([x]   #{x}) 
+    ([x y] #{x y}))
+
+  (make-set 1)
+  => #{1}
+
+  (make-set 1 2)
+  => #{1 2}
+  
+  (make-set 1 2 3)
+  => ArityException Wrong number of args passed...
+\end{minted}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Function Pre/Post Conditions}
+  \begin{minted}[fontsize=\normalsize]{clojure}
+(defn constrained-fn [f x]
+  {:pre  [(pos? x)]
+   :post [(= % (* 2 x))]}
+  (f x))
+
+(constrained-fn #(* 2 %) 2)
+=> 4
+(constrained-fn #(float (* 2 %)) 2)
+=> 4.0
+(constrained-fn #(* 3 %) 2)
+=> java.lang.Exception: Assert failed: (= % (* 2 x))
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Functions}
+  \begin{minted}[fontsize=\normalsize]{clojure}
+    ;; Keywords are functions
+
+    ;;Sets are functions of their elements that return the matched element or nil: 
+    (#{:a :b :c :d} :c)
+    => :c
+
+    (#{:a :b :c :d} :e)
+    => nil
+
+  \end{minted}
 \end{frame}
 
 \begin{frame}
@@ -464,12 +513,12 @@ public class Empty {
   \end{minted}
 \end{frame}
 
-\begin{frame}
+%%\begin{frame}
 %
 % Review JOC on this subject.
 %
-  \frametitle{Truthiness}
-\end{frame}
+%%   \frametitle{Truthiness}
+%% \end{frame}
 
 
 \begin{frame}
@@ -485,14 +534,14 @@ public class Empty {
   % Look here from some inspiration http://stuartsierra.com/2010/01/15/keyword-arguments-in-clojure
 \end{frame}
 
-\begin{frame}
-  \frametitle{Lazy-Seq TODO}
-\end{frame}
+%% \begin{frame}
+%%   \frametitle{Lazy-Seq TODO}
+%% \end{frame}
 
-\begin{frame}
-  \frametitle{vars and refs}
-  
-\end{frame}
+%% \begin{frame}
+%%   \frametitle{vars and refs}
+%%  
+%%\end{frame}
 
 \begin{frame}
   \frametitle{namespaces}
@@ -502,15 +551,33 @@ public class Empty {
   }  
 \end{frame}
 
-\begin{frame}
-  \frametitle{Java Interop}
-  
-  \itemize{
-  \item javadoc (open javadoc while in repl?)
-    % defunct \item memfn 
-  \item dot special form
-  \item bean
-  }
+\begin{frame}[fragile]
+  \frametitle{Host Interop}
+  \begin{minted}[fontsize=\small]{clojure}
+;; instance method invocation
+=> (.toUpperCase "fred")
+"FRED"
+
+;; classnames yield Class values
+=> (.getName String)
+"java.lang.String"
+
+;; constructor syntax 'Classname.'
+(def p (java.awt.Point. 1 2))
+
+;; field accessor
+=> (.-x p)
+1
+
+;; static method
+=> (System/getProperty "java.vm.version")
+"25.151-b12"
+
+;; static field
+=> Math/PI
+3.141592653589793
+  \end{minted}
+%% Mention bean?
 \end{frame}
 
 \begin{frame}
@@ -558,8 +625,17 @@ public class Empty {
   \item \href {https://www.clojure-toolbox.com/}
     {\color {blue}{Curated List of Libraries}}
 
+  \item \href {https://clojure.org/about/history}
+    {\color {blue}{History of Clojure}}
+
+ \item \href {https://www.braveclojure.com/}
+    {\color {blue}{CLOJURE for the BRAVE and TRUE}}
+  
   \item \href{https://github.com/edn-format/edn}
     {\color {blue}{Extensible Data Notation (EDN)}}
+
+  \item \href{https://reagent-project.github.io/}
+       {\color {blue}{Reagent (clojurescript + React = greatness)}}
 
   \item \href{https://github.com/tstout/examples/blob/master/clojure/slides/clojure-basics.tex}
        {\color {blue}{Code for this document}}

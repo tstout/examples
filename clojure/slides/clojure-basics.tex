@@ -75,6 +75,9 @@
   \end{columns}
 }
 
+%\resetcounter[footnote]
+%\setcounter{footnote}{0} 
+
 \frame{
   \frametitle{Origins of Clojure - McCarthy}
   \begin{columns}
@@ -128,7 +131,7 @@
 }
 
 \frame{
-  \frametitle{Many Lisp Implementations}
+ \frametitle{Many Lisp Implementations}
   % 
   % TODO add more?
   % 
@@ -272,6 +275,7 @@
   \end{itemize}
 }
 
+\setcounter{footnote}{0} 
 % TODO - Add Stuart Halloway attribution here...
 \frame{
   \frametitle{Clojure's Worldview}
@@ -280,7 +284,7 @@
   \item Data should not be hidden behind objects
   \item Mutable state makes concurrency, and most other things hard
   \item VMs not Operating Systems
-  \item Fight with the army we have (parasitic language - rely on a
+  \item Fight with the army we have \footnote{Borrowed from Stuart Halloway} (parasitic language - rely on a
     host env)
   \item Disciplined Evolution
   \item There is wisdom in history

@@ -432,6 +432,7 @@ public class Empty {
       "optional multiline doc comment"
       {:optional :metadata-map} 
       [arg1 arg2]
+      {:optional :pre/post-conditions-map}
       (...implementation...))
   \end{minted}
 
@@ -489,7 +490,7 @@ public class Empty {
 
 \begin{frame}[fragile]
   \frametitle{Functions}
-  \begin{minted}[fontsize=\normalsize]{clojure}
+  \begin{minted}[fontsize=\small]{clojure}
     ;; Keywords are functions which take a map as an
     ;; argument
     (:a {:a 1 :b 2 :c 3})
@@ -498,8 +499,8 @@ public class Empty {
     (:d {:a 1 :b 2 :c 3})
     => nil
 
-    ;;Sets are functions of their elements that return the 
-    ;;matched element or nil: 
+    ;; Sets are functions of their elements that return the 
+    ;; matched element or nil: 
     (#{:a :b :c :d} :c)
     => :c
 
@@ -511,17 +512,18 @@ public class Empty {
 
 \begin{frame}[fragile]
   \frametitle{Functions}
-  \begin{minted}[fontsize=\normalsize]{clojure}
-    ;; Vectors are functions which take an integer index and return the element at
-    ;; that position.
+  \begin{minted}[fontsize=\small]{clojure}
+    ;; Vectors are functions which take an integer index and 
+    ;; return the element at that position.
     ([1 2 3] 0)
     => 1
 
     ([1 2 3] 2)
     => 3
 
-    ;;Maps are functions which accept a argument to be used as a key to find an item
-    ;;in the map. Nil is returned if the key does not exist in the map.
+    ;; Maps are functions which accept an argument used as a key 
+    ;; to find an item in the map. Nil is returned if the key
+    ;; does not exist in the map.
     ({:a 1 :b 2 :c 3} :c)
     => 3
 

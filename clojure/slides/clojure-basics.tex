@@ -276,7 +276,6 @@
 }
 
 \setcounter{footnote}{0} 
-% TODO - Add Stuart Halloway attribution here...
 \frame{
   \frametitle{Clojure's Worldview}
   \begin{itemize}
@@ -372,7 +371,7 @@
 \begin{frame}[fragile]
   \frametitle{Core Clojure Syntax - Data Literals}
   \begin{minted}[fontsize=\tiny]{java}
-package cafebabe.prototypes;
+package example.prototypes;
 
 public class Empty {
 }
@@ -391,7 +390,7 @@ public class Empty {
                  {:constant-type :c-utf8 :str "SourceFile"}
                  {:constant-type :c-utf8 :str "Empty.java"}
                  {:constant-type :c-name-and-type :descriptor-index 4 :name-index 5}
-                 {:constant-type :c-utf8 :str "cafebabe/prototypes/Empty"}
+                 {:constant-type :c-utf8 :str "example/prototypes/Empty"}
                  {:constant-type :c-utf8 :str "java/lang/Object"}]
  :access-flags  33
  :this-class    2
@@ -408,25 +407,6 @@ public class Empty {
 
 \end{minted}  
 \end{frame}
-
-%% \begin{frame}
-%%   \frametitle{Limited Syntax Budget}
-%%   \begin{itemize}
-%%   \item Data Literals 
-%%   \item Reader Macros
-%%   \item Destructuring
-%%   \end{itemize}
-%% \end{frame}
-
-%% \begin{frame}
-%%   \frametitle{Syntax Sugar (Reader Macros)}
-%%   % 
-%%   % put table here...
-%%   % 
-%% \end{frame}
-
-
-
 
 \begin{frame}[fragile]
   \frametitle{Functions}
@@ -476,24 +456,43 @@ public class Empty {
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Function Pre/Post Conditions}
+  \frametitle{Variadic Functions}
   \begin{minted}[fontsize=\normalsize]{clojure}
-(defn constrained-fn [f x]
-  {:pre  [(pos? x)]
-   :post [(= % (* 2 x))]}
-  (f x))
+  (defn sum [& args]
+    (reduce + args))
 
-(constrained-fn #(* 2 %) 2)
-=> 4
-(constrained-fn #(float (* 2 %)) 2)
-=> 4.0
-(constrained-fn #(* 3 %) 2)
-=> java.lang.Exception: Assert failed: (= % (* 2 x))
+  (sum 1 2 3)
+  => 6
+
+  (sum)
+  => 0
+
+  (sum 10 20 30 40)
+  => 100
   \end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Functions}
+  \frametitle{Function Pre/Post Conditions}
+  \begin{minted}[fontsize=\normalsize]{clojure}
+  (defn constrained-fn [f x]
+    {:pre  [(pos? x) (fn? f)]
+     :post [(= % (* 2 x))]}
+    (f x))
+
+  (constrained-fn #(* 2 %) 2)
+  => 4
+
+  (constrained-fn #(float (* 2 %)) 2)
+  => 4.0
+
+  (constrained-fn #(* 3 %) 2)
+  => java.lang.Exception: Assert failed: (= % (* 2 x))
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Collections as Functions}
   \begin{minted}[fontsize=\small]{clojure}
     ;; Keywords are functions which take a map as an
     ;; argument
@@ -515,7 +514,7 @@ public class Empty {
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Functions}
+  \frametitle{Collections as Functions}
   \begin{minted}[fontsize=\small]{clojure}
     ;; Vectors are functions which take an integer index and 
     ;; return the element at that position.
@@ -537,9 +536,24 @@ public class Empty {
   \end{minted}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Functions - Metadata}
+  \begin{minted}[linenos=false,fontsize=\normalsize]{clojure}
+    (defn divisble?
+      "Is n divisble by d?"
+      {:test (fn []
+               (is (divisble? 49 7))
+               (is (not (divisble? 48 7)))
+               (is (divisble? 5 0)))}
+      [n d]
+      (zero? (try (mod n d)
+               (catch Exception _ 0))))
+  \end{minted}
+\end{frame}
+
 
 \begin{frame}
-  \frametitle{Multimethods}
+  \frametitle{Multimethods - Polymorphic Functions}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -560,21 +574,9 @@ public class Empty {
 
 
 \begin{frame}
-  \frametitle{Sequences}
-  \itemize {
-  \item Referred to as Seqs (pronouced seeks)
-  \item Unified interface for maps, lists, vectors, and sets  
-  }
-\end{frame}
-
-\begin{frame}
   \frametitle{Map Binding Forms}
   % Look here from some inspiration http://stuartsierra.com/2010/01/15/keyword-arguments-in-clojure
 \end{frame}
-
-%% \begin{frame}
-%%   \frametitle{Lazy-Seq TODO}
-%% \end{frame}
 
 %% \begin{frame}
 %%   \frametitle{vars and refs}
@@ -651,8 +653,6 @@ public class Empty {
     \includegraphics[scale=.20]{clojure-cave}
   }
 
-  % Look at wikimedia commons for fair use pictures
-
 \end{frame}
 
 %https://clojure.org/api/cheatsheet
@@ -677,16 +677,19 @@ public class Empty {
     {\color {blue}{Extensible Data Notation (EDN)}}
 
   \item \href{https://reagent-project.github.io/}
-       {\color {blue}{Reagent (clojurescript + React = greatness)}}
+    {\color {blue}{Reagent (clojurescript + React = fun + profit)}}
+
+  \item \href{http://www.paulgraham.com/avg.html}
+    {\color {blue}{Beating The Averages}}
 
   \item \href{https://github.com/tstout/examples/blob/master/clojure/slides/clojure-basics.tex}
-       {\color {blue}{Code for this document}}
+       {\color {blue}{Source Code for this document}}
 
   \end{itemize}
   }
 
 % 
-% Let over lambda example...can simplify with #()
+% Let over lambda example...can simplify with #() - but not as readable IMO.
 % 
 % (defn db-layer [db-connection]
 % (let [db-operations {:save (fn [obj] (save db-connection obj))

@@ -578,7 +578,7 @@ public class Empty {
 
 \begin{frame}[fragile]
   \frametitle{Namespace Example}
-  \begin{minted}[linenos=false,fontsize=\normalsize]{clojure}
+  \begin{minted}[linenos=false,fontsize=\small]{clojure}
   (ns myproj.db
    (:import [org.h2.tools Server]
             [java.net InetAddress]
@@ -601,18 +601,44 @@ public class Empty {
 
 
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Multimethods - Polymorphic Functions}
+  \begin{minted}[linenos=false,fontsize=\footnotesize]{clojure}
+  ;; Note: In this example, the keyword :Shape is being used as the
+  ;; dispatch function, as keywords are functions of maps
+  ;; area is a function defined by an open set of methods - a multimethod
+  ;; dispatch is determined by the value returned by :Shape 
+  ;; (a keyword used as a function)
+
+  (defmulti area :Shape)
+
+  ;; the method that will be called when :Shape returns :Rect
+  (defmethod area :Rect [r]
+    (* (:wd r) (:ht r)))
+  
+  ;; the method that will be called when :Shape returns :Circle
+  (defmethod area :Circle [c]
+    (* Math/PI (:radius c) (:radius c)))
+  
+  ;; the method that will be called when no other dispatch applies
+  (defmethod area :default [x] :oops)
+  
+  ;; information vs objects
+  (def r {:Shape :Rect, :wd 4, :ht 13})
+  (def c {:Shape :Circle, :radius 12})
+  => (area r)
+  52
+  => (area c)
+  452.3893421169302
+  => (area {})
+  :oops
+  \end{minted}
+  \Tiny\begin{verbatim}
+  This example taken from History of Clojure  
+  \end{verbatim}
+\normalsize
+  
 \end{frame}
-
-%% \begin{frame}[fragile]
-%%   \frametitle{Control Flow Primitives}
-%%   \begin{minted}[linenos=false,fontsize=\normalsize]{clojure}
-%%     (+ 1 2 3 4)
-%%     #"some regex"
-
-%%   \end{minted}
-%% \end{frame}
 
 \begin{frame}
   \frametitle{Map Binding Forms}
@@ -681,7 +707,7 @@ public class Empty {
   \begin{itemize}
 
   \item \href {https://www.clojure-toolbox.com/}
-    {\color {blue}{Curated List of Libraries}}
+    {\color {blue}{The Clojure Toolbox}}
 
   \item \href {https://clojure.org/api/cheatsheet}
     {\color {blue}{Cheatsheet}}
@@ -694,6 +720,9 @@ public class Empty {
   
   \item \href{https://github.com/edn-format/edn}
     {\color {blue}{Extensible Data Notation (EDN)}}
+
+  \item \href{https://clojure.org/guides/destructuring}
+    {\color {blue}{Destructuring Guide}}
 
   \item \href{https://reagent-project.github.io/}
     {\color {blue}{Reagent (clojurescript + React = fun + profit)}}

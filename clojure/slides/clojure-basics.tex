@@ -538,40 +538,81 @@ public class Empty {
 
 \begin{frame}[fragile]
   \frametitle{Functions - Metadata}
-  \begin{minted}[linenos=false,fontsize=\normalsize]{clojure}
-    (defn divisble?
+  \begin{minted}[linenos=false,fontsize=\footnotesize]{clojure}
+    (ns testing-examples.core
+      (:require [clojure.test :refer [is]]))
+
+    (defn divisible?
       "Is n divisble by d?"
       {:test (fn []
-               (is (divisble? 49 7))
-               (is (not (divisble? 48 7)))
-               (is (divisble? 5 0)))}
+               (is (divisible? 49 7))
+               (is (not (divisible? 48 7)))
+               (is (divisible? 5 0)))}
       [n d]
-      (zero? (try (mod n d)
-               (catch Exception _ 0))))
+      (zero? (try 
+               (mod n d)
+             (catch Exception _ 0))))
+      
+   ;; #' is sugar for (var ...)
+
+   (meta #'divisible?)  
+   => {:arglists ([n d])
+       :doc "Is n divisble by d?"
+       :test #function[testing-examples.core/fn--7295]
+       :line 4
+       :column 1
+       :file "/Users/tstout/basics/testing/src/testing_examples/core.clj"
+       :name divisible?
+       :ns #namespace[testing-examples.core]}
   \end{minted}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Namespaces}
+  \itemize{
+  \item Group Related Functions Together
+  \item Clojure's Fundamental unit of Organization
+  \item Dynamic - Can be Inspected/Manipulated at Runtime
+  }  
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Namespace Example}
+  \begin{minted}[linenos=false,fontsize=\normalsize]{clojure}
+  (ns myproj.db
+   (:import [org.h2.tools Server]
+            [java.net InetAddress]
+            [org.h2.jdbcx JdbcConnectionPool])
+   (:require [kratzen.config :refer [load-res load-config]]
+             [com.stuartsierra.component :as component]
+             [clojure.tools.logging :as log]
+             [clojure.java.jdbc :as jdbc])) 
+  
+  ;; --- Var definitions for this namespace --
+
+  (defn host-name []
+    (let [host (.. InetAddress getLocalHost getHostName)]
+      (log/infof "Using host name %s for DB..." host)
+      host))
+  
+
+  \end{minted}
+\end{frame}
+
 
 
 \begin{frame}
   \frametitle{Multimethods - Polymorphic Functions}
 \end{frame}
 
-\begin{frame}[fragile]
-  \frametitle{Control Flow Primitives}
-  \begin{minted}[linenos=false,fontsize=\normalsize]{clojure}
-    (+ 1 2 3 4)
-    #"some regex"
+%% \begin{frame}[fragile]
+%%   \frametitle{Control Flow Primitives}
+%%   \begin{minted}[linenos=false,fontsize=\normalsize]{clojure}
+%%     (+ 1 2 3 4)
+%%     #"some regex"
 
-  \end{minted}
-\end{frame}
-
-%%\begin{frame}
-%
-% Review JOC on this subject.
-%
-%%   \frametitle{Truthiness}
+%%   \end{minted}
 %% \end{frame}
-
 
 \begin{frame}
   \frametitle{Map Binding Forms}
@@ -583,13 +624,6 @@ public class Empty {
 %%  
 %%\end{frame}
 
-\begin{frame}
-  \frametitle{namespaces}
-  \itemize{
-  \item clojure.lang.Namespace
-  \item current accessible via nsy
-  }  
-\end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Host Interop}
@@ -621,31 +655,16 @@ public class Empty {
 \end{frame}
 
 \begin{frame}
-  \frametitle{Metadata}
-
-\end{frame}
-
-\begin{frame}
   \frametitle{REPL}
-  % 
-  % Useful repl stuff here...inspect-tree inspect-table javadoc doc
-  % source
-  % Must mention pst fn - invaluable!
-
+  \begin{itemize}
+  \item Build your Code Interactively
+  \item Build your Code Dynamically (no restarts required)
+  \item Quick Feedback
+  \item Experiment with Ease
+  \item Editor Integrated with Language Runtime
+  \end{itemize}
+  
 \end{frame}
-
-\begin{frame}
-  \frametitle{REPL Debugging}
-% 
-% pst - very useful!
-%
-
-\end{frame}
-
-\begin{frame}
-  \frametitle{Code Samples} 
-  \inputminted{clojure}{src/xml-parse.clj}
-\end{frame}  
 
 \begin{frame}
   \frametitle{Clojure}

@@ -125,7 +125,7 @@
   \item Conditionals
   \item A function type
   \item Recursion
-  \item Variables as pointers
+  \item New variable concept - values have types, not variables. Assigning/binding variables copies pointers, not what it points to.
   \item Garbage Collection
   \end{itemize}
 }
@@ -158,6 +158,8 @@
     \end{column}
     \begin{column}{.49\textwidth}
       \begin{itemize}
+        \item[] \href{https://www.cs.cmu.edu/~crary/819-f09/Hoare78.pdf}{\color{blue}{
+            CSP}}
         \item[] Foundation of core.async
       \end{itemize}
     \end{column}
@@ -166,7 +168,7 @@
 
 
 \frame{
-  \frametitle{Origin of Clojure - Persistent Data Structures - 1989}
+  \frametitle{Origin of Clojure - Persistent Data Structures - 1986}
   \begin {columns}
     \begin{column}{.49\textwidth}
       \begin{itemize}
@@ -234,6 +236,11 @@
   }
   %\vspace {.25 cm}
   %\center{ \tiny{Effectively Constant Time} }
+  \begin{tiny}
+  \href {https://gist.github.com/brymck/8266276}
+    {\color {blue}{clojure Big-O}}
+  \end{tiny}
+
 }
 
 
@@ -458,17 +465,17 @@ public class Empty {
 \begin{frame}[fragile]
   \frametitle{Variadic Functions}
   \begin{minted}[fontsize=\normalsize]{clojure}
-  (defn sum [& args]
-    (reduce + args))
+  (defn mean [& args]
+    (/ (reduce + args) (count args)))
 
-  (sum 1 2 3)
-  => 6
+  (mean 2 1 1 2)
+  => 3/2
 
-  (sum)
-  => 0
+  (mean)
+  => ArithmeticException Divide by zero
 
-  (sum 10 20 30 40)
-  => 100
+  (mean 10 20 30 40)
+  => 25
   \end{minted}
 \end{frame}
 
@@ -703,8 +710,9 @@ public class Empty {
   \end{columns}
   \vspace{3 cm}
 
+
   \begin{tiny}
-  \href {https://clojure.org/about/spec/}
+  \href {https://clojure.org/about/spec}
     {\color {blue}{rationale}}
 
   \href {https://clojure.org/guides/spec}
@@ -713,7 +721,7 @@ public class Empty {
 }
 
 \begin{frame}
-  \frametitle{REPL}
+  \frametitle{Interactive Development}
   \begin{itemize}
   \item Build your Code Interactively
   \item Build your Code Dynamically (no restarts required)
@@ -721,6 +729,10 @@ public class Empty {
   \item Experiment with Ease
   \item Editor Integrated with Language Runtime
   \end{itemize}
+  \begin{tiny}
+  \href {https://www.youtube.com/watch?v=gIoadGfm5T8}
+    {\color {blue}{REPL Driven Development}}
+  \end{tiny}
   
 \end{frame}
 
@@ -760,7 +772,10 @@ public class Empty {
     {\color {blue}{Deps and CLI Guide}}
 
   \item \href{https://reagent-project.github.io/}
-    {\color {blue}{Reagent (clojurescript + React = fun + profit)}}
+    {\color {blue}{Reagent (clojurescript + React = Fun!)}}
+
+  \item \href{https://clojure.org/community/companies}
+    {\color {blue}{Companies Using Clojure}}
 
   \item \href{http://www.paulgraham.com/avg.html}
     {\color {blue}{Beating The Averages}}

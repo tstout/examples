@@ -1,0 +1,157 @@
+% 
+% Compile with 'pdflatex -shell-escape clojure-basics.tex'
+% I use the mactex distro of Tex. https://tug.org/mactex/
+% 
+
+\documentclass{beamer}
+
+\usetheme{Madrid}    
+
+\usepackage{listings}                                   
+\usepackage{hyperref}
+\usepackage{graphicx}                                 
+\usepackage{tabularx}
+\usepackage{microtype}
+\usepackage[T1]{fontenc}
+\usepackage[scaled]{beramono}
+\usepackage{minted}
+\usepackage{xcolor}
+\usepackage{pgfplots}
+\usepackage{dirtytalk}
+\usepackage{tikz}
+\usetikzlibrary{tikzmark,fit}
+
+%\usepackage{enumitem}
+\pgfplotsset{compat=1.6} 
+
+\newcommand\Small{\fontsize{5}{5.2}\selectfont}
+\newcommand*\LSTfont{\Small\ttfamily\SetTracking{encoding=*}{-60}\lsstyle}
+\renewcommand{\footnotesize}{\tiny}
+
+\hypersetup{colorlinks=color, linkcolor=black}
+\definecolor{OliveGreen}{rgb}{0,0.6,0}
+\graphicspath{{./images/}}
+% 
+% Turn off beamer nav stuff...
+% 
+\setbeamertemplate{navigation symbols}{}
+
+
+%\input{lst-config/clojure-config}
+\begin{document}
+
+\begin{frame}
+  \frametitle{<Your Title Here>}
+  \center{
+    %
+    % Graphic for Title Page
+    %\includegraphics[scale=.40]{Clojure-Logo}
+    %
+  }
+\end{frame}
+
+\frame{
+  \frametitle{Your Title Page 1}
+  \say{Optional Catchy quote\ldots}
+
+  \rightline{{\rm  Author of Quote}}
+}
+
+\frame{
+  \frametitle{Title Page 2}
+  % \begin{columns}
+  %   \begin{column}{.49\textwidth}
+  %     \includegraphics[scale=.50]{church}
+  %   \end{column}
+  %   \begin{column}{.49\textwidth}
+  %     \itemize{
+  %     \item Alonzo Church - 1936
+  %     \item $\lambda$ Calculus
+  %      \footnote{\href{https://www.ics.uci.edu/~lopes/teaching/inf212W12/readings/church.pdf}
+  %        {An Unsolvable Problem of Elementary Number Theory}}
+  %     }
+
+  %   \end{column}
+  %\end{columns}
+}
+
+%\resetcounter[footnote]
+%\setcounter{footnote}{0} 
+
+\frame{
+  \frametitle{Title Page 3}
+  % \begin{columns}
+  %   \begin{column}{.49\textwidth}
+  %     \includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{john-mccarthy}
+  %   \end{column}
+  %   \begin{column}{.49\textwidth}
+  %     % \vspace {4 cm}
+  %     \itemize{
+  %     \item John McCarthy - 1958
+  %     \item
+  %       OriginalPaper - 1960
+  %       \footnote{\href{http://www-formal.stanford.edu/jmc/recursive.html}{Original Paper}}
+  %     \item 
+  %       Influenced by Church \& IPL 
+  %       \footnote{\href{https://en.wikipedia.org/wiki/Information_Processing_Language}{
+  %           IPL Overview}}
+  %       \vspace {4 cm}
+  %     }
+  %   \end{column}
+  % \end{columns}
+}
+
+% \frame{
+%   \frametitle{Title - Page of Items}
+%   \begin{itemize}
+%   \item Item 1
+%   % To not show following item until keypress
+%   % \pause
+%   \item Item 2
+%   \item Item 3
+%   \end{itemize}
+% }
+
+% Example of inlining code with minted
+% \begin{frame}[fragile]
+%   \frametitle{Functions}
+%   Typical function definition:
+%   \begin{minted}[fontsize=\normalsize,escapeinside=||]{clojure}
+%     (defn foo 
+%       "optional multiline doc comment"
+%       {:optional :metadata-map} 
+%       [arg1 arg2]
+%       {:optional :pre/post-conditions-map}
+%       (...implementation...))
+%   \end{minted}
+
+%   \vspace{1 cm}
+
+% %% [autogobble,fontfamily=myfont,escapeinside=||}{c}
+
+%   This is an anonymous function (sum of its args):
+%   \begin{minted}[fontsize=\normalsize]{clojure}
+%     (fn [a b] (+ a b))   
+%   \end{minted}
+%   \vspace{1 cm}
+
+%   An abbreviated equivalent:
+%   \begin{minted}[fontsize=\normalsize]{clojure}
+%     #(+ %1 %2)
+%   \end{minted}
+% \end{frame}
+
+
+%https://clojure.org/api/cheatsheet
+\frame{
+  \frametitle{Resources}
+  \begin{itemize}
+
+  % \item \href {https://www.example.com/}
+  %   {\color {blue}{Link to useful info}}
+
+    %% put back ref to source code-[]
+  \end{itemize}
+}
+
+\end{document}

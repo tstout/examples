@@ -25,3 +25,9 @@ target
 *.pdf
 *.vrb
 _minted
+.clj-kondo
+.lsp
+.vscode
+.rebel_readline_history
+_minted*
+

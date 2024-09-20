@@ -30,4 +30,6 @@ _minted
 .vscode
 .rebel_readline_history
 _minted*
+.cpcache
+output.calva-repl
 
